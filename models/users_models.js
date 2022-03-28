@@ -24,6 +24,9 @@ const User = db.define('User', {
         type: DataTypes.ARRAY(DataTypes.STRING),
         allowNull: true
     }
-});
+},
+    {
+        underscored: true
+    });
 
 module.exports = User;
