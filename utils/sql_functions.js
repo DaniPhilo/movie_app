@@ -50,6 +50,6 @@ const addToFavourites = async (data) => {
 
 module.exports = {
     createUser,
-    findUser,
+findUser,
     addToFavourites
 }
