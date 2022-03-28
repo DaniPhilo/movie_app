@@ -8,13 +8,13 @@ const { signUp } = require('../controllers/sql_controllers');
 
 // GET
 router.get('/', (req,res) => {
-    res.render('index', {signup: false, login: false});
+    res.render('index', {action: null});
 });
 router.get('/signup', (req, res) => {
-    res.render('index', {signup: true, login: false})
+    res.render('index', {action: 'signup'})
 });
 router.get('/login', (req, res) => {
-    res.render('index', {signup: false, login: true})
+    res.render('index', {action: 'login'})
 });
 
 router.get('/dashboard', (req,res) => {

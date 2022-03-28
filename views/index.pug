@@ -10,12 +10,12 @@ html(lang="en")
             h1 Header
             
         main
-            if !signup && !login
+            if !action
                 div#buttons-container
                     button(type="button" id="signup-btn" onclick="toSignUp()") Sign Up
                     button(type="button" id="login-btn" onclick="toLogIn()") Log In 
 
-            else if signup && !login
+            else if action === 'signup'
                 button(type="button" id="back-btn" onclick="goBack()") Go Back
                 div#signup-container
                     h2 Sign Up 
@@ -35,7 +35,7 @@ html(lang="en")
 
                         input(type="submit" value="Sign Up")
             
-            else if !signup && login
+            else if action === 'login'
                 button(type="button" id="back-btn" onclick="goBack()") Go Back
                 div#login-container
                     h2 Log In
