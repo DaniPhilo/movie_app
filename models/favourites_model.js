@@ -48,7 +48,5 @@ const Favourite = db.define('Favourite', {
     {
         underscored: true
     });
-
-
-Favourite.sync({ alter: true });
+    
 module.exports = Favourite;

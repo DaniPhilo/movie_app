@@ -2,9 +2,9 @@ const { createUser } = require('../utils/sql_functions');
 
 const signUp = async (req, res) => {
     const data = {
-        name: req.body.name,
-        email: req.body.email,
-        password: req.body.password
+        name: req.body['signup-name'],
+        email: req.body['signup-email'],
+        password: req.body['signup-password']
     }
     try {
         const newUser = await createUser(data);
