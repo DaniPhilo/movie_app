@@ -28,5 +28,5 @@ const User = db.define('User', {
     {
         underscored: true
     });
-
+    
 module.exports = User;

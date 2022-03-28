@@ -4,7 +4,7 @@ const { db, connectSQL } = require('../db/sql_connection');
 const Favourite = db.define('Favourite', {
     favourite_id: {
         type: Sequelize.UUID,
-        defeaultValue: Sequelize.UUIDV1,
+        defaultValue: Sequelize.UUIDV1,
         primaryKey: true,
         allowNull: false
     },
@@ -30,7 +30,7 @@ const Favourite = db.define('Favourite', {
     },
     genre: {
         type: DataTypes.ARRAY(DataTypes.STRING),
-        allowNull: false
+        allowNull: true
     },
     plot: {
         type: DataTypes.TEXT,
@@ -49,4 +49,6 @@ const Favourite = db.define('Favourite', {
         underscored: true
     });
 
+
+Favourite.sync({ alter: true });
 module.exports = Favourite;
