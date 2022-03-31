@@ -2,7 +2,7 @@
 const express = require('express');
 const router = express.Router();
 
-const { signUp } = require('../controllers/sql_controllers');
+const { signUp, logIn } = require('../controllers/sql_controllers');
 
 
 
@@ -40,9 +40,7 @@ router.get('/movies', (req,res) => {
 // POST
 router.post('/signup', signUp);
 
-router.post('/login', (req, res) => {
-    
-});
+router.post('/login', logIn);
 router.post('/logout', (req, res) => {
     
 });

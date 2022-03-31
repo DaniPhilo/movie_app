@@ -13,10 +13,10 @@ const createUser = async (data) => {
     }
 }
 
-const findUser = async (userId) => {
+const findUserByEmail = async (email) => {
     try {
-        const response = await User.findOne({ where: { user_id: userId } });
-        const user = response.dataValues;
+        const response = await User.findOne({ where: { email: email } });
+        return response
     }
     catch (error) {
         console.log(error);
@@ -28,7 +28,7 @@ const addToFavourites = async (data) => {
         const newFav = await Favourite.create(data);
         // Updates user table adding favourites_id to user's list
         const user = await User.findOne({ where: { user_id: newFav.user_id } });
-        await user.update({ 'favourites': Sequelize.fn('array_append', Sequelize.col('favourites'), newFav.favourite_id)});
+        await user.update({ 'favourites': Sequelize.fn('array_append', Sequelize.col('favourites'), newFav.favourite_id) });
     }
     catch (error) {
         console.log(error);
@@ -50,6 +50,6 @@ const addToFavourites = async (data) => {
 
 module.exports = {
     createUser,
-findUser,
+    findUserByEmail,
     addToFavourites
 }

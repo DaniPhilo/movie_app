@@ -17,8 +17,8 @@ html(lang="en")
 
             else if action === 'signup'
                 button(type="button" id="back-btn" onclick="goBack()") Go Back
-                if error 
-                    p #{error}
+                if error && error.status === 400
+                    p #{error.message}
                 div#signup-container
                     h2 Sign Up 
                     form(action="/signup" method="POST")
@@ -39,6 +39,8 @@ html(lang="en")
             
             else if action === 'login'
                 button(type="button" id="back-btn" onclick="goBack()") Go Back
+                if error && error.status === 401
+                   p #{error.message}
                 div#login-container
                     h2 Log In
                     form(action="/login" method="POST")
@@ -49,6 +51,6 @@ html(lang="en")
                         label(for="login-password") Password:
                         input(type="password" name="login-password" id="login-password")
 
-                        input(type="submit" value="Sign Up")
+                        input(type="submit" value="Log In")
     
         script(src="./js/index.js")

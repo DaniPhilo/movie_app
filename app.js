@@ -10,7 +10,7 @@ const port = process.env.PORT;
 const { connectSQL } = require('./db/sql_connection');
 
 // Requerir errores personalizados:
-const { NotFoundError, BadRequest, AuthenticationError } = require('./errors/errors.js')
+const { NotFoundError, BadRequest, AuthenticationError } = require('./errors/errors.js');
 
 // Inicializar el servidor
 const express = require('express');
@@ -27,10 +27,23 @@ app.use(express.static('public'));
 app.use("/", filmRouter);
 
 app.use((error, req, res, next) => {
-    if (error.status === 400) {
-        console.log('Error entered error handler in server (status 400)')
-        return res.render('index', {action: 'signup', error: error.message})
+    if (error.status === 401) {
+    
+        console.log(`Error from error handler in server: ${error.status} ${error.name} -- ${error.message}`)
+        return res.render('index', {action: 'login', error: error})
     }
+    next(error)
+})
+app.use((error, req, res, next) => {
+    if (error.status === 400) {
+        console.log(`Error from error handler in server: ${error.status} ${error.name} -- ${error.message}`)
+        return res.render('index', {action: 'signup', error: error})
+    }
+    next(error)
+})
+
+app.use((req, res, next) => {
+    res.status(404).render('error');
 })
 
 // Función que prueba la conexión a PostgreSQL antes de iniciar el servidor:
