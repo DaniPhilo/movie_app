@@ -1,10 +1,8 @@
 //Requerir el dotenv
 require("dotenv").config();
 
-// Importar API del .env
-const apiKey = process.env.API_KEY;
-// Puerto a usar por la página
-const port = process.env.PORT;
+// Requiere librería para manejar cookies:
+const cookieParser = require('cookie-parser');
 
 // Requiere la función que inicia la conexión con PostgreSQL:
 const { connectSQL } = require('./db/sql_connection');
@@ -17,14 +15,30 @@ const express = require('express');
 const app = express();
 const filmRouter = require('./routes/routes');
 
+// Importar API del .env
+const apiKey = process.env.API_KEY;
+// Puerto a usar por la página
+const port = process.env.PORT;
+
+
 app.set('view engine', 'pug');
 app.set('views', './views');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
+app.use(cookieParser());
 
 app.use("/", filmRouter);
+
+
+app.use((error, req, res, next) => {
+    if (error.status === 400) {
+        console.log(`Error from error handler in server: ${error.status} ${error.name} -- ${error.message}`)
+        return res.render('index', {action: 'signup', error: error})
+    }
+    next(error)
+})
 
 app.use((error, req, res, next) => {
     if (error.status === 401) {
@@ -34,10 +48,12 @@ app.use((error, req, res, next) => {
     }
     next(error)
 })
+
 app.use((error, req, res, next) => {
-    if (error.status === 400) {
+    if (error.status === 403) {
+    
         console.log(`Error from error handler in server: ${error.status} ${error.name} -- ${error.message}`)
-        return res.render('index', {action: 'signup', error: error})
+        return res.render('index', {action: 'login', error: error})
     }
     next(error)
 })

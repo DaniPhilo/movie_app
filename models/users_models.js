@@ -23,6 +23,15 @@ const User = db.define('User', {
     favourites: {
         type: DataTypes.ARRAY(DataTypes.STRING),
         allowNull: true
+    },
+    refresh_token: {
+        type: DataTypes.STRING,
+        allowNull: true
+    },
+    is_admin: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false
     }
 },
     {

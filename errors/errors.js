@@ -27,6 +27,16 @@ class AuthenticationError extends Error {
     }
 }
 
+class ForbiddenError extends Error {
+    constructor(message) {
+        super();
+        this.name = 'Forbidden';
+        this.message = message;
+        this.type = 'authentication';
+        this.status = 403
+    }
+}
+
 module.exports = {
     NotFoundError,
     BadRequest,

@@ -3,7 +3,7 @@ const { checkPassword } = require('./hashing');
 
 const signUpValidations = async (data) => {
     let error = [];
-    const name = data.name.match(/^[\w\.\s]{0,20}$/gi).join('') || null;
+    const name = data.name.match(/^[\w\.\s]{0,20}$/gi) || null;
     if (!name) {
         error.push('name');
     }

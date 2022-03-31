@@ -2,7 +2,7 @@ const { createUser, findUserByEmail } = require('../utils/sql_functions');
 const { signUpValidations, loginValidations } = require('../utils/formulary_validations');
 const { createHash } = require('../utils/hashing');
 const { AuthenticationError } = require('../errors/errors');
-const { hash } = require('bcrypt');
+
 const signUp = async (req, res, next) => {
     const data = {
         name: req.body['signup-name'],
@@ -14,7 +14,8 @@ const signUp = async (req, res, next) => {
         await signUpValidations(data);
         data.password = await createHash(data.password);
         const newUser = await createUser(data);
-        res.send(newUser);
+        req.user = newUser;
+        return next()
     }
     catch(error) {
         return next(error)
@@ -31,12 +32,13 @@ const logIn = async (req, res, next) => {
         if (!user) {
             throw new AuthenticationError('Wrong email or password');
         }
+        req.user = user;
         const hashedPassword = user.password;
         const result = await loginValidations(data.password, hashedPassword);
         if (!result) {
             throw new AuthenticationError('Wrong email or password');
         }
-        res.send({message: `Correct login validation: ${user.email}`})
+        return next()
     }
     catch (error) {
         next(error)

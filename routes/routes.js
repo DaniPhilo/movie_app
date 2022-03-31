@@ -2,7 +2,8 @@
 const express = require('express');
 const router = express.Router();
 
-const { signUp, logIn } = require('../controllers/sql_controllers');
+const { signUp, logIn, createAccessToken, createRefreshToken, authenticateToken, refreshToken } = require('../middleware/main_middlewares');
+const { toDashboard, showDashboard } = require('../controllers/controllers');
 
 
 
@@ -17,10 +18,7 @@ router.get('/login', (req, res) => {
     res.render('index', {action: 'login'})
 });
 
-router.get('/dashboard', (req,res) => {
-    console.log("Hola desde el panel de control de la app!");
-    //res.render?
-});
+router.get('/dashboard', authenticateToken, refreshToken, showDashboard);
 
 router.get('/search/:title', (req,res) => {
     console.log("Aquí tienes tu película.");
@@ -38,9 +36,9 @@ router.get('/movies', (req,res) => {
 });
 
 // POST
-router.post('/signup', signUp);
+router.post('/signup', signUp, createAccessToken, createRefreshToken, toDashboard);
 
-router.post('/login', logIn);
+router.post('/login', logIn, createAccessToken, createRefreshToken, toDashboard);
 router.post('/logout', (req, res) => {
     
 });
