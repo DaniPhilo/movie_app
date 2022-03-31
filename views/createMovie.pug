@@ -1,0 +1,22 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Document
+    body 
+        form(action="/createMovie" method="POST")
+            label(for="titulo") Titulo 
+            input(type="text" placeholder="Titulo" name="titulo")
+            label(for="year") Año 
+            input(type="text" placeholder="Año" name="year")
+            label(for="director") Director 
+            input(type="text" placeholder="Director" name="director")
+            label(for="genero") Genero 
+            input(type="text" placeholder="Genero" name="genero")
+            label(for="duracion") Duración 
+            input(type="text" placeholder="Duración" name="duracion")
+            label(for="imagen") Imagen 
+            input(type="text" name="imagen")
+            input(type="submit")
