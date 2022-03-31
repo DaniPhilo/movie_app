@@ -1,3 +1,5 @@
+const { BadRequest } = require('../errors/errors');
+
 const signUpValidations = async (data) => {
     let error = [];
     const name = data.name.match(/^[\w\.\s]{0,20}$/gi);
@@ -14,7 +16,7 @@ const signUpValidations = async (data) => {
         error.push('password')
     }
     if (error.length > 0) {
-        throw `Incorrect ${error}.`
+        throw new BadRequest(`Invalid ${error}.`)
     }
 }
 

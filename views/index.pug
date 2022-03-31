@@ -17,6 +17,8 @@ html(lang="en")
 
             else if action === 'signup'
                 button(type="button" id="back-btn" onclick="goBack()") Go Back
+                if error 
+                    p #{error}
                 div#signup-container
                     h2 Sign Up 
                     form(action="/signup" method="POST")

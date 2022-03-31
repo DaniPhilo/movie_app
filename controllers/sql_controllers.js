@@ -1,7 +1,7 @@
 const { createUser } = require('../utils/sql_functions');
 const { signUpValidations } = require('../utils/formulary_validations');
 
-const signUp = async (req, res) => {
+const signUp = async (req, res, next) => {
     const data = {
         name: req.body['signup-name'],
         email: req.body['signup-email'],
@@ -14,8 +14,7 @@ const signUp = async (req, res) => {
         res.send(newUser);
     }
     catch(error) {
-        console.log(error);
-        res.end();
+        return next(error)
     }
 }
 

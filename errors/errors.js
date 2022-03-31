@@ -1,0 +1,34 @@
+class NotFoundError extends Error {
+    constructor(name, message, type, status) {
+        super();
+        this.name = 'Not Found';
+        this.message = 'Route does not exist'
+        this.type = 'simple'
+        this.status = 404
+    }
+}
+
+class BadRequest extends Error {
+    constructor(message) {
+        super();
+        this.name = 'Bad Request';
+        this.message = message;
+        this.status = 400;
+    }
+}
+
+class AuthenticationError extends Error {
+    constructor(message) {
+        super();
+        this.name = 'Unauthorized';
+        this.message = message;
+        this.type = 'authentication';
+        this.status = 401
+    }
+}
+
+module.exports = {
+    NotFoundError,
+    BadRequest,
+    AuthenticationError
+}
