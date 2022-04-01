@@ -1,0 +1,27 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Film Browser 
+    body
+        header 
+            h1 Header 
+        main
+            section
+                form(action="/search", method="POST")
+                    input(type="text", name="filmBrowser", placeholder="Busca tu película")
+                    input(type="submit", value="Search")
+
+            section.films__section
+                    if response
+                        for film of response.Search
+                            div.films__container 
+                                p.film__id #{film.imdbID}
+                                p.film__title #{film.Title}
+                                p.film__year #{film.Year}
+                                img.film__img(src=`${film.Poster}`)
+                                input.input__show(type="button", value="Show details", name="showFilm")
+                                input.input__save(type="button", value="Save as favourite<3")
+        script(src="/js/searchView.js")
