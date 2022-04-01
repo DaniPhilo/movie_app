@@ -2,7 +2,7 @@
 const express = require('express');
 const router = express.Router();
 
-const { signUp, logIn, createAccessToken, createRefreshToken, authenticateToken, refreshToken } = require('../middleware/main_middlewares');
+const { signUp, logIn, createAccessToken, createRefreshToken, authenticateToken, refreshToken, renderRecoveryPage, sendRecoveryEmail, renderRestorePage, restorePassword } = require('../middleware/main_middlewares');
 const { toDashboard, showDashboard } = require('../controllers/controllers');
 
 
@@ -57,12 +57,8 @@ router.delete('/removeMovie', (req, res) => {
 });
 
 // GET's para la recoverpasword y restorepassword
-router.get('/recoverpassword', (req, res) => {
-    console.log("Vista para recuperar la contraseña");
-});
+router.route('/recoverpassword').get(renderRecoveryPage).post(sendRecoveryEmail);
 
-router.get('/restorepassword', (req, res) => {
-    console.log("Vista para restaurar la contraseña");
-});
+router.route('/restorepassword').get(renderRestorePage).post(restorePassword);
 
 module.exports = router;

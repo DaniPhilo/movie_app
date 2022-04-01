@@ -1,13 +1,3 @@
-class NotFoundError extends Error {
-    constructor(name, message, type, status) {
-        super();
-        this.name = 'Not Found';
-        this.message = 'Route does not exist'
-        this.type = 'simple'
-        this.status = 404
-    }
-}
-
 class BadRequest extends Error {
     constructor(message) {
         super();
@@ -34,6 +24,16 @@ class ForbiddenError extends Error {
         this.message = message;
         this.type = 'authentication';
         this.status = 403
+    }
+}
+
+class NotFoundError extends Error {
+    constructor(name, message, type, status) {
+        super();
+        this.name = 'Not Found';
+        this.message = 'Route does not exist'
+        this.type = 'simple'
+        this.status = 404
     }
 }
 

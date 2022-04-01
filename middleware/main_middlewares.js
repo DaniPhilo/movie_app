@@ -1,5 +1,6 @@
 const { signUp, logIn } = require('./sql_middlewares');
 const { createAccessToken, createRefreshToken, authenticateToken, refreshToken } = require('./jwt_middlewares');
+const { renderRecoveryPage, sendRecoveryEmail, renderRestorePage, restorePassword } = require('./nodemailer_middlewares');
 
 module.exports = {
     signUp,
@@ -7,5 +8,9 @@ module.exports = {
     createAccessToken,
     createRefreshToken,
     authenticateToken,
-    refreshToken
+    refreshToken,
+    renderRecoveryPage,
+    sendRecoveryEmail,
+    renderRestorePage,
+    restorePassword
 }

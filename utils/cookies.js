@@ -11,13 +11,8 @@ const createCookie = (res, name, value) => {
     });
 }
 
-const deleteCookies = (res) => {
-    res.clearCookie('access_token', {
-        secure: true,
-        httpOnly: true,
-        sameSite: 'lax'
-    });
-    res.cookie('refresh_token', {
+const deleteCookie = (res, name) => {
+    res.clearCookie(name, {
         secure: true,
         httpOnly: true,
         sameSite: 'lax'
@@ -26,5 +21,5 @@ const deleteCookies = (res) => {
 
 module.exports = {
     createCookie,
-    deleteCookies
+    deleteCookie
 }

@@ -1,6 +1,6 @@
 require('dotenv').config();
 
-const { createCookie } = require('../utils/cookie_creation');
+const { createCookie } = require('../utils/cookies');
 const { findUserById, findUserByEmail } = require('../utils/sql_functions');
 const jwt = require('jsonwebtoken');
 
@@ -71,7 +71,7 @@ const refreshToken = async (req, res, next) => {
         
         const accessToken = jwt.sign({ user_id: dbUser.user_id }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '5s' });
         const newRefreshToken = jwt.sign({ user_id: dbUser.user_id }, process.env.REFRESH_TOKEN_SECRET, { expiresIn: '1d' });
-        await dbUser.update({ refresh_token:newRefreshToken})
+        await dbUser.update({ refresh_token: newRefreshToken })
         await dbUser.save();
         createCookie(res, 'access_token', accessToken);
         createCookie(res, 'refresh_token', newRefreshToken);
