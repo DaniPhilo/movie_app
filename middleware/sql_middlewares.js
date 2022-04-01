@@ -1,5 +1,5 @@
 const { createUser, findUserByEmail } = require('../utils/sql_functions');
-const { signUpValidations, loginValidations } = require('../utils/formulary_validations');
+const { signUpValidations, loginValidations } = require('../utils/validations');
 const { createHash } = require('../utils/hashing');
 const { AuthenticationError } = require('../errors/errors');
 

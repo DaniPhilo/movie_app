@@ -5,8 +5,10 @@ const jwt = require('jsonwebtoken');
 
 const { createCookie, deleteCookie } = require('../utils/cookies');
 const { createHash } = require('../utils/hashing');
+const { validateRecoveryPassword } = require('../utils/validations');
 const { findUserByEmail } = require('../utils/sql_functions');
-const { AuthenticationError } = require('../errors/errors');
+const { AuthenticationError, BadRequest } = require('../errors/errors');
+const { networkInterfaces } = require('nodemailer/lib/shared');
 
 const renderRecoveryPage = (req, res) => {
     res.status(200).render('recover_password');
@@ -18,7 +20,7 @@ const sendRecoveryEmail = async (req, res, next) => {
         const foundUser = await findUserByEmail(email);
         if (!foundUser) {
             const error = new AuthenticationError('Wrong email');
-            next(error)
+            return next(error)
         }
         const recoveryToken = jwt.sign({ email: email }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '10m' });
         createCookie(res, 'recovery_token', recoveryToken);
@@ -45,9 +47,13 @@ const renderRestorePage = (req, res) => {
 const restorePassword = async (req, res, next) => {
     const { password, password2 } = req.body;
     const token = req.cookies.recovery_token;
-    // We have to validate password!
 
     try {
+        const validation = validateRecoveryPassword(password, password2);
+        if(!validation) {
+            const error = new BadRequest('Invalid password.', 'recovery');
+            return next(error);
+        }
         jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, async (err, user) => {
             if (err) {
                 const error = new AuthenticationError('You do not have the required credentials, or theese have expired. Please, try again');
