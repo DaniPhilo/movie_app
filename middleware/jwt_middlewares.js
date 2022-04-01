@@ -42,6 +42,7 @@ const authenticateToken = (req, res, next) => {
         if (err) {
             req.params.auth = 'False';
         }
+        req.user = user;
         return next();
     });
 }
@@ -62,6 +63,8 @@ const refreshToken = async (req, res, next) => {
             const error = new ForbiddenError('Invalid refresh token provided')
             return next(error)
         }
+
+        req.user = user;
 
         const dbUser = await findUserById(user.user_id);
         if (refreshToken !== dbUser.refresh_token) {

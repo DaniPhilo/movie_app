@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 
 const { signUp, logIn, createAccessToken, createRefreshToken, authenticateToken, refreshToken, renderRecoveryPage, sendRecoveryEmail, renderRestorePage, restorePassword } = require('../middleware/main_middlewares');
-const { toDashboard, showDashboard } = require('../controllers/controllers');
+const { toDashboard, showDashboard, logOut } = require('../controllers/controllers');
 
 
 
@@ -39,9 +39,7 @@ router.get('/movies', (req,res) => {
 router.post('/signup', signUp, createAccessToken, createRefreshToken, toDashboard);
 
 router.post('/login', logIn, createAccessToken, createRefreshToken, toDashboard);
-router.post('/logout', (req, res) => {
-    
-});
+router.post('/logout', authenticateToken, refreshToken, logOut);
 router.post('/createMovie', (req, res) => {
     
 });

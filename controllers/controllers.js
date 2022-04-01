@@ -1,3 +1,5 @@
+const logOut = require('../utils/logout');
+
 const toDashboard = (req, res) => {
     res.redirect('/dashboard')
 }
@@ -8,5 +10,6 @@ const showDashboard = (req, res) => {
 
 module.exports = {
     toDashboard,
-    showDashboard
+    showDashboard,
+    logOut
 }

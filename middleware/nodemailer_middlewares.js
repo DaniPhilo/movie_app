@@ -33,10 +33,10 @@ const sendRecoveryEmail = async (req, res, next) => {
             <a href = ${url}>Click here to recover your password</a>
             <p>Link will expire in 10 minutes</p>`
         });
-        res.status(200).render('recover_password', { message: 'A recovery email has been sent to your mail direction' })
+        res.status(200).render('recover_password', { message: 'A recovery email has been sent to your mail direction' });
     }
     catch (error) {
-        console.log(error)
+        console.log(error);
     }
 }
 
@@ -65,15 +65,15 @@ const restorePassword = async (req, res, next) => {
                 const error = new AuthenticationError('User does not exist. Please, try again');
                 return next(error);
             }
-            await dbUser.update({ password: hashedPassword })
+            await dbUser.update({ password: hashedPassword });
             await dbUser.save();
-            deleteCookie(res, 'recovery_token')
+            deleteCookie(res, 'recovery_token');
             
-            res.status(200).render('restore_password', { restored_password: true})
+            res.status(200).render('restore_password', { restored_password: true});
         });
     }
     catch (error) {
-        console.log(error)
+        console.log(error);
     }
 }
 
