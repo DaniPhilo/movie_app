@@ -40,5 +40,6 @@ class ForbiddenError extends Error {
 module.exports = {
     NotFoundError,
     BadRequest,
-    AuthenticationError
+    AuthenticationError,
+    ForbiddenError
 }

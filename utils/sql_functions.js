@@ -13,6 +13,16 @@ const createUser = async (data) => {
     }
 }
 
+const findUserById = async (id) => {
+    try {
+        const response = await User.findOne({ where: { user_id: id } });
+        return response
+    }
+    catch (error) {
+        console.log(error);
+    }
+}
+
 const findUserByEmail = async (email) => {
     try {
         const response = await User.findOne({ where: { email: email } });
@@ -50,6 +60,7 @@ const addToFavourites = async (data) => {
 
 module.exports = {
     createUser,
+    findUserById,
     findUserByEmail,
     addToFavourites
 }
