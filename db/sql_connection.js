@@ -1,6 +1,6 @@
 require('dotenv').config();
 const { Sequelize } = require('sequelize');
-const db = new Sequelize(process.env.POSTGRES_URI);
+const db = new Sequelize(process.env.POSTGRESQL_URI);
 
 const connectSQL = async () => {
     try {
