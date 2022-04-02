@@ -16,12 +16,15 @@ html(lang="en")
 
             section.films__section
                     if response
-                        for film of response.Search
-                            div.films__container 
-                                p.film__id #{film.imdbID}
+                        for film of response
+                            div.films__container
                                 p.film__title #{film.Title}
-                                p.film__year #{film.Year}
                                 img.film__img(src=`${film.Poster}`)
-                                input.input__show(type="button", value="Show details", name="showFilm")
+                                p.film__year #{film.Year}
+                                p.film__director #{film.Director}
+                                p.film__genre #{film.Genre}
+                                p.film__runtime #{film.Runtime}
+                                input.input__show(type="button", value="Show details", name="showFilm", required)
                                 input.input__save(type="button", value="Save as favourite<3")
+
         script(src="/js/searchView.js")

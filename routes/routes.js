@@ -1,11 +1,11 @@
-//Rutas para la API
+// Dependencias
 const express = require('express');
 const router = express.Router();
 
+const films = require('../controllers/films');
 
 
-
-
+//RUTAS PARA LA APP
 // GET
 router.get('/', (req,res) => {
     console.log("Hola desde el inicio de la app!");
@@ -17,15 +17,31 @@ router.get('/dashboard', (req,res) => {
     //res.render?
 });
 
-router.get('/search/:title', (req,res) => {
-    console.log("Aquí tienes tu película.");
-    //res.render?
-});
 
-router.get('/search', (req,res) => {
-    console.log("Hola desde el buscador de la app!");
-    //res.render?
-});
+
+
+/*************************************************************************/
+
+
+
+router.get('/search/:title?', films.getFilmsByTitle);
+
+router.post('/search', films.redirectToList);
+
+router.get('/search/:title?')
+
+router.post('/search/title?', function (req, res) {
+    let id = req.body.showFilm;
+    res.redirect(`http://localhost:3000/search/${id}`)
+})
+
+
+
+/*************************************************************************/
+
+
+
+
 
 router.get('/movies', (req,res) => {
     console.log("Aquí tienes tus películas favoritas.");
