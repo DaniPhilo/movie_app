@@ -42,6 +42,8 @@ const authenticateToken = (req, res, next) => {
         if (err) {
             req.params.auth = 'False';
         }
+
+        // Metemos user_id en req.user para tener siempre disponible en cada page la id de la DB del usuario.
         req.user = user;
         return next();
     });
@@ -78,9 +80,14 @@ const authenticateRefreshToken = async (req, res, next) => {
         await dbUser.update({ refresh_token: newRefreshToken })
         await dbUser.save();
 
+        
+
         createCookie(res, 'access_token', accessToken);
         createCookie(res, 'refresh_token', newRefreshToken);
         
+        // Metemos user_id en req.user para tener siempre disponible en cada page la id de la DB del usuario.
+        req.user = user;
+
         return next();
     });
 

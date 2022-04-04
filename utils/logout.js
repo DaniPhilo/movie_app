@@ -10,6 +10,9 @@ const logOut = async (req, res) => {
         deleteCookie(res, 'access_token');
         deleteCookie(res, 'refresh_token');
 
+        req.logout();
+        req.session.destroy();
+
         res.status(200).end();
     }
     catch (error) {
