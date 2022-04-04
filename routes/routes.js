@@ -29,6 +29,8 @@ router.get('/auth/google/callback',
         failureRedirect: '/'
     }),
     googleAuth,
+    createAccessToken, 
+    createRefreshToken,
     toDashboard
     );
 
