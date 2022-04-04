@@ -34,7 +34,7 @@ const createRefreshToken = async (req, res, next) => {
 const authenticateToken = (req, res, next) => {
     const token = req.cookies.access_token;
     if (!token) {
-        const error = new ForbiddenError('No refresh token provided');
+        const error = new ForbiddenError('No access token provided');
         return next(error)
     }
 
@@ -47,12 +47,13 @@ const authenticateToken = (req, res, next) => {
     });
 }
 
-const refreshToken = async (req, res, next) => {
+const authenticateRefreshToken = async (req, res, next) => {
+
     if (req.params.auth !== 'False') {
         return next();
     }
-    const refreshToken = req.cookies.refresh_token;
 
+    const refreshToken = req.cookies.refresh_token;
     if (!refreshToken) {
         const error = new ForbiddenError('No refresh token provided')
         return next(error)
@@ -64,8 +65,6 @@ const refreshToken = async (req, res, next) => {
             return next(error)
         }
 
-        req.user = user;
-
         const dbUser = await findUserById(user.user_id);
         if (refreshToken !== dbUser.refresh_token) {
             const error = new ForbiddenError('Refresh token does not match DB')
@@ -73,11 +72,15 @@ const refreshToken = async (req, res, next) => {
         }
         
         const accessToken = jwt.sign({ user_id: dbUser.user_id }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '5s' });
+
         const newRefreshToken = jwt.sign({ user_id: dbUser.user_id }, process.env.REFRESH_TOKEN_SECRET, { expiresIn: '1d' });
+
         await dbUser.update({ refresh_token: newRefreshToken })
         await dbUser.save();
+
         createCookie(res, 'access_token', accessToken);
         createCookie(res, 'refresh_token', newRefreshToken);
+        
         return next();
     });
 
@@ -87,5 +90,5 @@ module.exports = {
     createAccessToken,
     createRefreshToken,
     authenticateToken,
-    refreshToken
+    authenticateRefreshToken
 }

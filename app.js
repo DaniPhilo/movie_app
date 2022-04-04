@@ -1,4 +1,4 @@
-//Requerir el dotenv
+// Requerir el dotenv
 require("dotenv").config();
 
 // Requiere librería para manejar cookies:
@@ -12,7 +12,12 @@ const { NotFoundError, BadRequest, AuthenticationError } = require('./errors/err
 
 // Inicializar el servidor
 const express = require('express');
+const session = require('express-session');
+const passport = require('passport');
+
 const app = express();
+
+// Importar rutas:
 const filmRouter = require('./routes/routes');
 
 // Importar API del .env
@@ -24,6 +29,9 @@ const port = process.env.PORT;
 app.set('view engine', 'pug');
 app.set('views', './views');
 
+app.use(session({ secret: process.env.SESSION_SECRET }));
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));

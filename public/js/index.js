@@ -9,3 +9,7 @@ const toSignUp = () => {
 const toLogIn = () => {
     window.location.href = 'http://localhost:3000/login';
 }
+
+const toGoogleLogIn = () => {
+    window.location.href = 'http://localhost:3000/auth/google';
+}

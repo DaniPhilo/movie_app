@@ -13,7 +13,8 @@ html(lang="en")
             if !action
                 div#buttons-container
                     button(type="button" id="signup-btn" onclick="toSignUp()") Sign Up
-                    button(type="button" id="login-btn" onclick="toLogIn()") Log In 
+                    button(type="button" id="login-btn" onclick="toLogIn()") Log In
+                    button(type="button" id="login-btn" onclick="toGoogleLogIn()") Sign In with Google <i class="fa-brands fa-google"></i>
 
             else if action === 'signup'
                 button(type="button" id="back-btn" onclick="goBack()") Go Back
@@ -54,5 +55,7 @@ html(lang="en")
                         input(type="submit" value="Log In")
 
                     a(href="/recoverpassword") I forgot my password
-    
+
+
+        script(src="https://kit.fontawesome.com/61b8757a12.js" crossorigin="anonymous")
         script(src="./js/index.js")
