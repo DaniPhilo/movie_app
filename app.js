@@ -1,5 +1,8 @@
+
 // Requerir el dotenv
 require("dotenv").config();
+
+const apiKey = process.env.API_KEY;
 
 // Requiere librería para manejar cookies:
 const cookieParser = require('cookie-parser');
@@ -15,31 +18,42 @@ const express = require('express');
 const session = require('express-session');
 const passport = require('passport');
 
-const app = express();
-
 // Importar rutas:
 const filmRouter = require('./routes/routes');
 
-// Importar API del .env
-const apiKey = process.env.API_KEY;
+const express = require('express');
+const mongoose = require('mongoose');
+const app = express()
+
 // Puerto a usar por la página
 const port = process.env.PORT;
 
+const {createMovie, getMovies, getMovie, updateMovie, getMoviesDel, deleteMovie, getMovieDel} = require("./routes/movies.js")
 
 app.set('view engine', 'pug');
 app.set('views', './views');
 
+app.use(express.static('public'));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 app.use(session({ secret: process.env.SESSION_SECRET }));
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(express.static('public'));
 app.use(cookieParser());
 
 app.use("/", filmRouter);
 
+app.get("/createMovie", (req,res)=>{
+    res.render("createMovie")
+})
+app.post("/createMovie", createMovie)
+app.get("/editMovie", getMovies)
+app.get("/editMovie/:titulo", getMovie)
+app.post("/editMovie/:titulo", updateMovie)
+app.get("/removeMovie/:titulo", getMovieDel)
+app.post("/removeMovie/:titulo", deleteMovie)
 
+// Error handlers
 app.use((error, req, res, next) => {
     if (error.status === 400 && error.type === 'signup') {
         console.log(`Error from error handler in server: ${error.status} ${error.name}: ${error.type} -- ${error.message}`)
