@@ -1,0 +1,37 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Document
+    body
+        if lista
+            div
+                ul
+                    each val in lista
+                        li
+                            h2(id=`${val.titulo}`) Titulo: #{val.titulo}
+                            p Año: #{val.year}
+                            p Director: #{val.director}
+                            p Genero: #{val.genero}
+                            p Duración: #{val.duracion}
+                            img(src="#{val.imagen}")
+                            button(class="botonEditar") Editar 
+                            button(class="botonEliminar") Eliminar
+        if movie
+            form(action=`${movie.titulo}` method="POST") 
+                h2 Titulo:
+                    input(type="text" value=`${movie.titulo}` name="titulo")
+                p Año:
+                    input(type="number" value=`${movie.year}` name="year")
+                p Director: 
+                    input(type="text" value=`${movie.director}` name="director")
+                p Genero:
+                    input(type="text" value=`${movie.genero}` name="genero")
+                p Duracion 
+                    input(type="text" value=`${movie.duracion}` name="duracion")    
+                p Imagen:
+                    input(type="text", value=`${movie.imagen}` name="imagen")
+                input(type="submit" value="Guardar")
+        script(src='./js/edit_movie.js')
