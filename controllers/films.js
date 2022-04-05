@@ -1,43 +1,49 @@
-const films = require('../utils/films');
+const { getFilmsByTitle, getOneFilm } = require('../utils/apiFilms'); //Importamos las funciones de utils
 
-const getFilmsByTitle = async (req, res) => {
-    if (req.params.title) { // Si la encuentra, devuelve las películas buscadas por título
+
+// Controlador de la ruta GET /search/, la cual nos muestra la vista del buscador.
+const showBrowserView = (req, res) => {
+    res.render('searchView')
+}
+
+
+// Controlador para la ruta POST /search/
+const getListOfFilms = async (req, res) => {
+    let films = req.body.filmBrowser
+    if (films) { // Si la encuentra, devuelve las películas buscadas por título
         try {
-            let response = await films.getFilmsByTitle(req.params.title);
-            /* let littleInfo = response[0];
-            let bigInfo = response[1]; */
-            /* console.log(response.Search[0]); */
+            let response = await getFilmsByTitle(films);
             console.log(response);
-            /* res.status(200).render("searchView", {littleInfo}) */ // film.imdbID hace alusión al film of searchedFilms del pug
-            res.status(200).render("searchView", {response})
+            res.status(200).render("searchView", { response })
         } catch (err) {
-            res.status(400).json({message:err})
+            res.status(400).json({ message: err })
         }
     } else {
         res.status(200).render("searchView")
     }
 }
 
-const redirectToList = async (req, res) => {
-    let films = req.body.filmBrowser
-    res.redirect(`http://localhost:3000/search/${films}`)
-}
-
-const getFilm = async (req, res) => {
-    if (req.params.id) {
+//Controlador para la vista /search/:title
+const getSelectedFilm = async (req, res) => {
+    let title = req.params.title;
+    if (title) {
         try {
-            const response = await films.getFilm(req.params.id);
-            res.render('searchView', { searchedFilm: response })
+            let response = await getOneFilm(title)
+            console.log(response);
+            let ratings = response.Ratings // En la respuesta viene un array de Ratings, definimos la función
+            res.status(200).render("selectedFilm", { response , ratings}) // y se la pasamos al render para pintarla.
         } catch (error) {
-            console.log(`ERROR: ${error.stack}`);
+            res.status(400).json({ message: err })
         }
+    } else {
+        res.status(200).render("searchView")
     }
 }
 
-    const film = {
-        getFilmsByTitle,
-        redirectToList,
-        getFilm
-    }
 
-    module.exports = film;
+// Exportamos los controladores
+module.exports = {
+    showBrowserView,
+    getListOfFilms,
+    getSelectedFilm
+}

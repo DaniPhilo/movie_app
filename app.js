@@ -1,8 +1,6 @@
-//Requerir el dotenv
+// Requerir el dotenv
 require("dotenv").config();
 
-// Importar API del .env
-const apiKey = process.env.API_KEY;
 // Puerto a usar por la página
 const port = process.env.PORT;
 

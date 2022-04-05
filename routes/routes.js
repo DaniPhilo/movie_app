@@ -2,10 +2,15 @@
 const express = require('express');
 const router = express.Router();
 
-const films = require('../controllers/films');
+// Importamos los controladores.
+const {
+    showBrowserView,
+    getListOfFilms,
+    getSelectedFilm
+} = require('../controllers/films');
 
 
-//RUTAS PARA LA APP
+// RUTAS PARA LA APP
 // GET
 router.get('/', (req,res) => {
     console.log("Hola desde el inicio de la app!");
@@ -24,16 +29,9 @@ router.get('/dashboard', (req,res) => {
 
 
 
-router.get('/search/:title?', films.getFilmsByTitle);
-
-router.post('/search', films.redirectToList);
-
-router.get('/search/:title?')
-
-router.post('/search/title?', function (req, res) {
-    let id = req.body.showFilm;
-    res.redirect(`http://localhost:3000/search/${id}`)
-})
+router.get('/search', showBrowserView);
+router.post('/search', getListOfFilms);
+router.get('/search/:title', getSelectedFilm);
 
 
 
