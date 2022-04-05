@@ -16,6 +16,9 @@ html(lang="en")
                     button(type="button" id="login-btn" onclick="toLogIn()") Log In
                     button(type="button" id="login-btn" onclick="toGoogleLogIn()") Sign In with Google <i class="fa-brands fa-google"></i>
 
+                    button(type="button" id="signup-btn" onclick="toGuestLogin()") Guest
+                    button(type="button" id="login-btn" onclick="toAdminLogin()") Admin
+
             else if action === 'signup'
                 button(type="button" id="back-btn" onclick="goBack()") Go Back
                 if error && error.status === 400
