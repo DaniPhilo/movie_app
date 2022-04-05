@@ -1,10 +1,6 @@
 // Requerir el dotenv
 require("dotenv").config();
 
-
-// Puerto a usar por la página
-const port = process.env.PORT;
-
 // Requiere librería para manejar cookies:
 const cookieParser = require('cookie-parser');
 
