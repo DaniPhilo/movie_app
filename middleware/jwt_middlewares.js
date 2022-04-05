@@ -20,8 +20,8 @@ const createAccessToken = (req, res, next) => {
 const createRefreshToken = async (req, res, next) => {
     try {
         const refreshToken = jwt.sign({ user_id: req.user.user_id }, process.env.REFRESH_TOKEN_SECRET, { expiresIn: '1d' });
-        const user = await findUserByEmail(req.user.email);
-        await user.update({ refresh_token: refreshToken});
+        const user = await findUserById(req.user.user_id);
+        user.refresh_token = refreshToken;
         await user.save();
         createCookie(res, 'refresh_token', refreshToken);
         return next();
@@ -33,6 +33,7 @@ const createRefreshToken = async (req, res, next) => {
 
 const authenticateToken = (req, res, next) => {
     const token = req.cookies.access_token;
+    console.log(`Cookie in accessToken: ${token}`)
     if (!token) {
         const error = new ForbiddenError('No access token provided');
         return next(error)
@@ -45,6 +46,8 @@ const authenticateToken = (req, res, next) => {
 
         // Metemos user_id en req.user para tener siempre disponible en cada page la id de la DB del usuario.
         req.user = user;
+        console.log(`From accessToken: `+JSON.stringify(req.user))
+
         return next();
     });
 }
@@ -87,6 +90,7 @@ const authenticateRefreshToken = async (req, res, next) => {
         
         // Metemos user_id en req.user para tener siempre disponible en cada page la id de la DB del usuario.
         req.user = user;
+        console.log(`From refreshToken: `+JSON.stringify(req.user))
 
         return next();
     });

@@ -26,6 +26,8 @@ const {
     getMovieDel
 } = require('../controllers/controllers');
 
+const { findUserByEmail } = require('../utils/sql_functions');
+
 // Rutas de signup / login;
 router.get('/', (req, res) => {
     res.render('index', { action: null });
@@ -86,8 +88,9 @@ router.post('/login', logIn, createAccessToken, createRefreshToken, toDashboard)
 router.post('/logout', authenticateToken, authenticateRefreshToken, logOut);
 
 router.get('/login/guest',
-    (req, res, next) => {
-        req.user = { user_id: '17571a50-b4d9-11ec-87a7-87d67eb16a0d', email: 'guest@guest.com' };
+    async (req, res, next) => {
+        const user = await findUserByEmail('guest@guest.com');
+        req.user = { user_id: user.user_id };
         return next()
     },
     createAccessToken,
@@ -95,8 +98,9 @@ router.get('/login/guest',
     (req, res) => {
         res.redirect('/dashboard')
     })
-router.get('/login/admin', (req, res, next) => {
-    req.user = { user_id: '1726bb80-b4d9-11ec-87a7-87d67eb16a0d', email: 'admin@admin.com' };
+router.get('/login/admin', async (req, res, next) => {
+    const user = await findUserByEmail('admin@admin.com');
+    req.user = { user_id: user.user_id };
     return next()
 },
     createAccessToken,
