@@ -1,6 +1,10 @@
 // Requerir el dotenv
 require("dotenv").config();
 
+
+// Puerto a usar por la página
+const port = process.env.PORT;
+
 // Requiere librería para manejar cookies:
 const cookieParser = require('cookie-parser');
 
@@ -11,6 +15,7 @@ const connectMongoDb = require('./config/mongodb_connection');
 // Requerir errores personalizados:
 const { NotFoundError, BadRequest, AuthenticationError } = require('./errors/errors.js');
 
+
 // Inicializar el servidor
 const express = require('express');
 const session = require('express-session');
@@ -18,7 +23,6 @@ const passport = require('passport');
 
 // Importar rutas:
 const filmRouter = require('./routes/routes');
-
 const app = express()
 
 // Puerto a usar por la página

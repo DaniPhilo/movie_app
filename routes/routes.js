@@ -1,3 +1,7 @@
+
+// Importamos los controladores.
+const { showBrowserView, getListOfFilms, getSelectedFilm } = require('../controllers/films');
+
 // Importar autenticación de passport para Google:
 const passport = require('passport');
 require('../utils/passport_google_auth');
@@ -21,8 +25,6 @@ const {
     deleteMovie,
     getMovieDel
 } = require('../controllers/controllers');
-
-
 
 // Rutas de signup / login;
 router.get('/', (req, res) => {
@@ -65,18 +67,13 @@ router.route("/removeMovie/:titulo")
 
 // Rutas de usuario:
 
+router.route('/search')
+  .get(showBrowserView)
+  .post(getListOfFilms);
+
+router.get('/search/:title', getSelectedFilm);
+
 router.get('/dashboard', authenticateToken, authenticateRefreshToken, showDashboard);
-
-router.get('/search/:title', (req, res) => {
-    console.log("Aquí tienes tu película.");
-    //res.render?
-});
-
-router.get('/search', (req, res) => {
-    // Aquí se hace el fetch
-    console.log("Hola desde el buscador de la app!");
-    //res.render?
-});
 
 router.get('/movies', (req, res) => {
     res.render('admin');
