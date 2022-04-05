@@ -1,0 +1,26 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title 
+    body 
+        header
+            h1 Your Film 
+        main
+            p Title: #{response.Title}
+            input(type="button", value="Save as favourites")
+            img(src=`${response.Poster}`)
+            p Year: #{response.Year}
+            p Director: #{response.Director}
+            p Genre: #{response.Genre}
+            p Runtime: #{response.Runtime}
+            p Plot: #{response.Plot}
+            p Cast: #{response.Actors}
+            p Rating:
+                each rating in ratings
+                    div
+                        p Source: #{rating.Source}
+                        p Value: #{rating.Value}
+            p Viewers reviews: 
