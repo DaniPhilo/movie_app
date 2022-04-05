@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-mongoose.connect("mongodb://localhost:27017/movapp");
+
 const movieSchema = {
   titulo:String,
   year:Number,
@@ -9,5 +9,6 @@ const movieSchema = {
   imagen:String
 }
 const Movie = mongoose.model("movies", movieSchema);
+
 module.exports = Movie;
 
