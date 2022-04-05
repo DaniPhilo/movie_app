@@ -6,6 +6,9 @@ html(lang="en")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         title Document
     body 
+        if success 
+            p #{success}
+
         form(action="/createMovie" method="POST")
             label(for="titulo") Titulo 
             input(type="text" placeholder="Ej: Titanic" name="titulo")

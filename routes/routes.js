@@ -8,11 +8,23 @@ const router = express.Router();
 
 const { signUp, logIn, createAccessToken, createRefreshToken, authenticateToken, authenticateRefreshToken, renderRecoveryPage, sendRecoveryEmail, renderRestorePage, restorePassword, googleAuth } = require('../middleware/main_middlewares');
 
-const { toDashboard, showDashboard, logOut } = require('../controllers/controllers');
+const {
+    toDashboard,
+    showDashboard,
+    logOut,
+    goToMovies,
+    createMovie,
+    getMovies,
+    getMovie,
+    updateMovie,
+    getMoviesDel,
+    deleteMovie,
+    getMovieDel
+} = require('../controllers/controllers');
 
 
 
-// GET
+// Rutas de signup / login;
 router.get('/', (req, res) => {
     res.render('index', { action: null });
 });
@@ -33,6 +45,25 @@ router.get('/auth/google/callback',
     createRefreshToken,
     toDashboard
 );
+
+// Rutas del admin:
+
+router.route("/createMovie")
+    .get(authenticateToken, authenticateRefreshToken, goToMovies)
+    .post(authenticateToken, authenticateRefreshToken, createMovie)
+
+router.get("/editMovie", authenticateToken, authenticateRefreshToken, getMovies)
+
+router.route('/editMovie/:titulo')
+    .get(authenticateToken, authenticateRefreshToken, getMovie)
+    .post(authenticateToken, authenticateRefreshToken, updateMovie)
+
+router.route("/removeMovie/:titulo")
+    .get(authenticateToken, authenticateRefreshToken, getMovieDel)
+    .post(authenticateToken, authenticateRefreshToken, deleteMovie)
+
+
+// Rutas de usuario:
 
 router.get('/dashboard', authenticateToken, authenticateRefreshToken, showDashboard);
 
@@ -74,22 +105,8 @@ router.get('/login/admin', (req, res, next) => {
     createAccessToken,
     createRefreshToken,
     (req, res) => {
-        res.redirect('/movies')
-    })
-
-router.post('/createMovie', (req, res) => {
-
-});
-
-// PUT
-router.put('/editMovie', (req, res) => {
-
-});
-
-// DELETE
-router.delete('/removeMovie', (req, res) => {
-
-});
+        res.redirect('/createMovie')
+    });
 
 // GET's para la recoverpasword y restorepassword
 router.route('/recoverpassword').get(renderRecoveryPage).post(sendRecoveryEmail);

@@ -1,14 +1,12 @@
-
 // Requerir el dotenv
 require("dotenv").config();
-
-const apiKey = process.env.API_KEY;
 
 // Requiere librería para manejar cookies:
 const cookieParser = require('cookie-parser');
 
 // Requiere la función que inicia la conexión con PostgreSQL:
-const { connectSQL } = require('./db/sql_connection');
+const { connectSQL } = require('./config/sql_connection');
+const connectMongoDb = require('./config/mongodb_connection');
 
 // Requerir errores personalizados:
 const { NotFoundError, BadRequest, AuthenticationError } = require('./errors/errors.js');
@@ -21,14 +19,10 @@ const passport = require('passport');
 // Importar rutas:
 const filmRouter = require('./routes/routes');
 
-const express = require('express');
-const mongoose = require('mongoose');
 const app = express()
 
 // Puerto a usar por la página
 const port = process.env.PORT;
-
-const {createMovie, getMovies, getMovie, updateMovie, getMoviesDel, deleteMovie, getMovieDel} = require("./routes/movies.js")
 
 app.set('view engine', 'pug');
 app.set('views', './views');
@@ -42,16 +36,6 @@ app.use(passport.session());
 app.use(cookieParser());
 
 app.use("/", filmRouter);
-
-app.get("/createMovie", (req,res)=>{
-    res.render("createMovie")
-})
-app.post("/createMovie", createMovie)
-app.get("/editMovie", getMovies)
-app.get("/editMovie/:titulo", getMovie)
-app.post("/editMovie/:titulo", updateMovie)
-app.get("/removeMovie/:titulo", getMovieDel)
-app.post("/removeMovie/:titulo", deleteMovie)
 
 // Error handlers
 app.use((error, req, res, next) => {
@@ -92,6 +76,7 @@ app.use((req, res, next) => {
 const init = async () => {
     try {
         await connectSQL();
+        await connectMongoDb();
         app.listen(port, () => {
             console.log(`App listening on port ${port}...`);
         })
