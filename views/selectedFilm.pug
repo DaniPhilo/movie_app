@@ -12,7 +12,7 @@ html(lang="en")
             button(type="button" id="goBackBtn" onclick="goBack()") Go Back
             button(type="button" id="logOutBtn" onclick="logOut()") Log Out
         main
-            p Title: #{response.Title}
+            p#movie-title Title: #{response.Title}
             if favourites.includes(response.imdbID)
                 input.input__delete(type="button", id=`${response.imdbID}` onclick="removeFromFav(event)" value="Saved")
             else
@@ -30,6 +30,7 @@ html(lang="en")
                         p Source: #{rating.Source}
                         p Value: #{rating.Value}
             p Viewers reviews: 
+
 
 
         script(src="/js/selected_film.js")

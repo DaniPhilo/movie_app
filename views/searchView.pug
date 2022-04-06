@@ -32,8 +32,4 @@ html(lang="en")
                                 else
                                     input.input__save(type="button", id=`${film.imdbID}` onclick="saveFav(event)" value="Save as favourite<3")
 
-                    if favourites 
-                        each fav in favourites 
-                            p #{fav}
-
         script(src="/js/searchView.js")
