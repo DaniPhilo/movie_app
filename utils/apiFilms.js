@@ -8,7 +8,6 @@ const getFilmsByTitle = async (title) => {
     try {
         let request = await fetch(`http://www.omdbapi.com/?apikey=${apiKey}&type=movie&s=${title}`); //{}
         let films = await request.json();
-        console.log(films)
         return films.Search // En el array Search[] de la respuesta vienen los datos que necesitamos para pintarlos en la vista pertinente
     } catch (error) {
         console.log(`ERROR: ${error.stack}`);
@@ -28,8 +27,19 @@ const getOneFilm = async (title) => {
     }
 }
 
+const getFilmById = async (id) => {
+    try {
+        const response = await fetch(`http://www.omdbapi.com/?i=${id}&apikey=${apiKey}`);
+        const data = await response.json();
+        return data
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 // Exportamos las funciones
 module.exports = {
     getFilmsByTitle,
-    getOneFilm
+    getOneFilm,
+    getFilmById
 }

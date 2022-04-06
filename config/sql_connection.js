@@ -7,7 +7,7 @@ const connectSQL = async () => {
         await db.authenticate();
         console.log('PostgreSQL database connected...');
     } catch (error) {
-        console.error('Unable to connect to the database:', error);
+        console.error('Unable to connect to SQL database:', error);
     }
 }
 
