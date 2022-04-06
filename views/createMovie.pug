@@ -6,20 +6,23 @@ html(lang="en")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         title Document
     body 
-        if success 
-            p #{success}
+        header
+            include /partials/nav.pug
+        main
+            if success 
+                p #{success}
 
-        form(action="/createMovie" method="POST")
-            label(for="titulo") Titulo 
-            input(type="text" placeholder="Ej: Titanic" name="titulo")
-            label(for="year") Año 
-            input(type="text" placeholder="Ej: 1997" name="year")
-            label(for="director") Director 
-            input(type="text" placeholder="Ej: James Cameron" name="director")
-            label(for="genero") Genero 
-            input(type="text" placeholder="Ej: Drama/Romance" name="genero")
-            label(for="duracion") Duración 
-            input(type="text" placeholder="Ej: 195 mins" name="duracion")
-            label(for="imagen") Imagen 
-            input(type="text" name="imagen")
-            input(type="submit")
+            form(action="/createMovie" method="POST")
+                label(for="titulo") Titulo 
+                input(type="text" placeholder="Ej: Titanic" name="titulo")
+                label(for="year") Año 
+                input(type="text" placeholder="Ej: 1997" name="year")
+                label(for="director") Director 
+                input(type="text" placeholder="Ej: James Cameron" name="director")
+                label(for="genero") Genero 
+                input(type="text" placeholder="Ej: Drama/Romance" name="genero")
+                label(for="duracion") Duración 
+                input(type="text" placeholder="Ej: 195 mins" name="duracion")
+                label(for="imagen") Imagen 
+                input(type="text" name="imagen")
+                input(type="submit")
