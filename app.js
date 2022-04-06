@@ -19,7 +19,7 @@ const passport = require('passport');
 
 // Importar rutas:
 const filmRouter = require('./routes/routes');
-const app = express()
+const app = express();
 
 // Puerto a usar por la página
 const port = process.env.PORT;
