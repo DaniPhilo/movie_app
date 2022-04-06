@@ -1,0 +1,26 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Document
+    body 
+        body 
+            button(type="button" id="add-button" onclick="goToAddMovie()") Add movie
+
+            if movies 
+                each movie in movies
+                    div 
+                        h2 Titulo: #{movie.titulo}
+                        img(src=`${movie.imagen}` || null)
+                        p Year: #{movie.year}
+                        p Director: #{movie.director}
+                        p Genre: #{movie.genero}
+                        p Duration: #{movie.duracion}
+                        img(src="#{movie.imagen}")
+                        button.edit-button(type="button" id=`${movie.titulo}` onclick="toEditMovie(event)") Edit
+                        button.remove-button(type="button" id=`${movie.titulo}` onclick="toDeleteMovie(event)") Delete
+
+        
+            script(src='/js/admin_movies.js')
