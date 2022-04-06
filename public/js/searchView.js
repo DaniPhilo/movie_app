@@ -4,56 +4,51 @@ const deleteButton = document.querySelectorAll('.input__delete');
 const logOutBtn = document.querySelector('#logOutBtn');
 
 // Eventlistener para ir a vista detalle de película:
-if (boton != null) {
-    Array.from(boton).map((e, i) => {
-        e.addEventListener('click', function () {
-            const botonID = e.getAttribute('id');
-            window.location.href = `/search/${botonID}`
-        })
-    })
+const goToMovie = async (event) => {
+    const botonID = event.target.getAttribute('id');
+    window.location.href = `/search/${botonID}`
 }
 
-// Eventlistener para guardar en favoritos
-if (saveButton != null) {
-    Array.from(saveButton).map((item) => {
-        item.addEventListener('click', async () => {
-            const buttonID = item.getAttribute('id');
-            try {
-                await fetch('http://localhost:3000/movies', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                      },
-                      body: JSON.stringify({ movieID : buttonID })
-                })
-            }
-            catch (error) {
-                console.log(error)
-            }
-        })
-    })
+// Eventlistener para guardar en favoritos:
+const saveFav = async (event) => {
+    const buttonID = event.target.getAttribute('id');
+    try {
+        await fetch('http://localhost:3000/movies', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ movieID: buttonID })
+        });
+
+        event.target.setAttribute('class', 'input__delete');
+        event.target.setAttribute('onclick', 'removeFromFav(event)');
+        event.target.setAttribute('value', 'Saved');
+    }
+    catch (error) {
+        console.log(error)
+    }
 }
 
 // Eventlistener para borrar de favoritos
-if (deleteButton != null) {
-    Array.from(deleteButton).map((item) => {
-        item.addEventListener('click', async () => {
-            const buttonID = item.getAttribute('id');
-            try {
-                await fetch('http://localhost:3000/movies/remove', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                      },
-                      body: JSON.stringify({ movieID : buttonID })
-                });
-                location.reload();
-            }
-            catch (error) {
-                console.log(error)
-            }
-        })
-    })
+const removeFromFav = async (event) => {
+    const buttonID = event.target.getAttribute('id');
+    try {
+        await fetch('http://localhost:3000/movies/remove', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ movieID: buttonID })
+        });
+
+        event.target.setAttribute('class', 'input__save');
+        event.target.setAttribute('onclick', 'saveFav(event)');
+        event.target.setAttribute('value', 'Save as favourite<3');
+    }
+    catch (error) {
+        console.log(error)
+    }
 }
 
 // Eventlistener para logout:

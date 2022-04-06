@@ -9,13 +9,14 @@ html(lang="en")
         header
             h1 Your Film 
 
+            button(type="button" id="goBackBtn" onclick="goBack()") Go Back
             button(type="button" id="logOutBtn" onclick="logOut()") Log Out
         main
             p Title: #{response.Title}
             if favourites.includes(response.imdbID)
-                input.input__save(type="button", id=`${response.imdbID}` value="Saved")
+                input.input__delete(type="button", id=`${response.imdbID}` onclick="removeFromFav(event)" value="Saved")
             else
-                input.input__save(type="button", id=`${response.imdbID}` value="Save as favourites")
+                input.input__save(type="button", id=`${response.imdbID}` onclick="saveFav(event)" value="Save as favourites")
             img(src=`${response.Poster}`)
             p Year: #{response.Year}
             p Director: #{response.Director}

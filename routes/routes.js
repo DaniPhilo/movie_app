@@ -1,6 +1,6 @@
 
 // Importamos los controladores.
-const { showBrowserView, getListOfFilms, getSelectedFilm } = require('../controllers/films');
+const { showBrowserView, getListOfFilms, getSelectedFilm, getListOfFavourites } = require('../controllers/films');
 
 // Importar autenticación de passport para Google:
 const passport = require('passport');
@@ -77,9 +77,7 @@ router.get('/search/:title', authenticateToken, authenticateRefreshToken, getSel
 
 
 router.route('/movies')
-    .get(authenticateToken, authenticateRefreshToken, (req, res) => {
-        res.render('favourites');
-    })
+    .get(authenticateToken, authenticateRefreshToken, getListOfFavourites)
     .post(authenticateToken, authenticateRefreshToken, addToFavourites)
 
 router.post('/movies/remove', authenticateToken, authenticateRefreshToken, deleteFromFavourites)

@@ -13,4 +13,17 @@ html(lang="en")
         main 
             h1 Favourites movies
 
+            if movies 
+                each movie in movies
+                    div.film__container
+                        p.film__title #{movie.Title}
+                        img.film__img(src=`${movie.Poster}`)
+                        p.film__year #{movie.Year}
+                        p.film__director #{movie.Director}
+                        p.film__genre #{movie.Genre}
+                        p.film__runtime #{movie.Runtime}
+                        input(class = "input__show", id = `${movie.Title}`,type="button" value="Show details", name="showFilm" onclick="goToMovie(event)")
+                        input.input__delete(type="button", id=`${movie.imdbID}` onclick="removeFromFav(event)" value="Saved")
+                        
+
         script(src="/js/favourites.js")

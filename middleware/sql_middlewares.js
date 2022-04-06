@@ -73,6 +73,15 @@ const addToFavourites = async (req, res, next) => {
     }
 }
 
+const getFavourites = async (id) => {
+    try {
+        const user = await findUserById(id);
+        return user.favourites
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 const deleteFromFavourites = async (req, res, next) => {
     console.log('Entered delete fav route')
     try {
@@ -100,5 +109,6 @@ module.exports = {
     signUp,
     logIn,
     addToFavourites,
+    getFavourites,
     deleteFromFavourites
 }

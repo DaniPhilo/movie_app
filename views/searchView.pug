@@ -26,11 +26,11 @@ html(lang="en")
                                 p.film__director #{film.Director}
                                 p.film__genre #{film.Genre}
                                 p.film__runtime #{film.Runtime}
-                                input(class = "input__show", id = `${film.Title}`,type="button", value="Show details", name="showFilm")
+                                input(class = "input__show", id = `${film.Title}`,type="button", value="Show details", name="showFilm" onclick="goToMovie(event)")
                                 if favourites.includes(film.imdbID)
-                                    input.input__delete(type="button", id=`${film.imdbID}` value="Saved")
+                                    input.input__delete(type="button", id=`${film.imdbID}` onclick="removeFromFav(event)" value="Saved")
                                 else
-                                    input.input__save(type="button", id=`${film.imdbID}` value="Save as favourite<3")
+                                    input.input__save(type="button", id=`${film.imdbID}` onclick="saveFav(event)" value="Save as favourite<3")
 
                     if favourites 
                         each fav in favourites 

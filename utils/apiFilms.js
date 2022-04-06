@@ -27,8 +27,19 @@ const getOneFilm = async (title) => {
     }
 }
 
+const getFilmById = async (id) => {
+    try {
+        const response = await fetch(`http://www.omdbapi.com/?i=${id}&apikey=${apiKey}`);
+        const data = await response.json();
+        return data
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 // Exportamos las funciones
 module.exports = {
     getFilmsByTitle,
-    getOneFilm
+    getOneFilm,
+    getFilmById
 }
