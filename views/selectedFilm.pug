@@ -10,7 +10,7 @@ html(lang="en")
             h1 Your Film 
         main
             p Title: #{response.Title}
-            input(type="button", value="Save as favourites")
+            input.input__save(type="button", id=`${response.imdbID}` value="Save as favourites")
             img(src=`${response.Poster}`)
             p Year: #{response.Year}
             p Director: #{response.Director}
@@ -24,3 +24,6 @@ html(lang="en")
                         p Source: #{rating.Source}
                         p Value: #{rating.Value}
             p Viewers reviews: 
+
+
+        script(src="/js/selected_film.js")

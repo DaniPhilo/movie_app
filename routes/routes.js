@@ -97,7 +97,7 @@ router.get('/login/guest',
     createAccessToken,
     createRefreshToken,
     (req, res) => {
-        res.redirect('/dashboard')
+        res.redirect('/search')
     })
 router.get('/login/admin', async (req, res, next) => {
     const user = await findUserByEmail('admin@admin.com');

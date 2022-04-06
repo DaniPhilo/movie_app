@@ -1,14 +1,5 @@
-const boton = document.querySelectorAll('.input__show');
 const saveButton = document.querySelectorAll('.input__save');
 
-if (boton != null) {
-    Array.from(boton).map((e, i) => {
-        e.addEventListener('click', function () {
-            const botonID = e.getAttribute('id');
-            window.location.href = `/search/${botonID}`
-        })
-    })
-}
 if (saveButton != null) {
     Array.from(saveButton).map((item) => {
         item.addEventListener('click', async () => {
