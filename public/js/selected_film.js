@@ -1,14 +1,3 @@
-const boton = document.querySelectorAll('.input__show');
-const saveButton = document.querySelectorAll('.input__save');
-const deleteButton = document.querySelectorAll('.input__delete');
-const logOutBtn = document.querySelector('#logOutBtn');
-
-// Eventlistener para ir a vista detalle de película:
-const goToMovie = async (event) => {
-    const botonID = event.target.getAttribute('id');
-    window.location.href = `/search/${botonID}`
-}
-
 // Eventlistener para guardar en favoritos:
 const saveFav = async (event) => {
     const buttonID = event.target.getAttribute('id');
@@ -58,3 +47,48 @@ const logOut = async () => {
     });
     window.location.href = 'http://localhost:3000'
 }
+
+const goBack = () => {
+    window.location.href = 'http://localhost:3000/search'
+}
+
+// Scrapping:
+
+const getReviews = async () => {
+    let text = document.querySelector('#movie-title').innerText;
+    let title = text.replace(/Title: /gi, '');
+    let parsedTitle = title.includes(' ') ? title.replace(/\s/gi, '-') : title;
+
+    const fetchScrapping = async () => {
+        const response = await fetch(`http://localhost:3000/search/${parsedTitle}`, {
+            method: 'POST'
+        });
+        const data = await response.json();
+        console.log(data)
+        return data
+    }
+    
+    let data = await fetchScrapping();
+
+    while (data.result[1].length < 1) {
+        data = await fetchScrapping();
+    };
+
+    const comments = [];
+
+    // La petición a Puppeteer devuelve un array bidimensional, por lo que hay que simplificarlo en un objeto que podamos pasar a pug:
+    data.result[0].forEach((item, index) => comments.push({ name: item, text: data.result[1][index] }));
+
+    return comments
+}
+
+getReviews()
+.then((reviews) => {
+    reviews.forEach(review => {
+        const comment = document.createElement('div');
+        comment.innerHTML = `<h3>${review.name}</h3>
+                             <p>${review.text}</p>`;
+        const main = document.querySelector('main');
+        main.appendChild(comment);
+    });
+});

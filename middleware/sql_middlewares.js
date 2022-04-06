@@ -1,4 +1,6 @@
-const { createUser, findUserByEmail } = require('../utils/sql_functions');
+const { Sequelize } = require('sequelize');
+const User = require('../models/users_models');
+const { createUser, findUserById, findUserByEmail } = require('../utils/sql_functions');
 const { signUpValidations, loginValidations } = require('../utils/validations');
 const { createHash } = require('../utils/hashing');
 const { BadRequest, AuthenticationError } = require('../errors/errors');
@@ -39,7 +41,7 @@ const logIn = async (req, res, next) => {
         if (!user) {
             throw new AuthenticationError('Wrong email or password');
         }
-        
+
         const hashedPassword = user.password;
         const result = await loginValidations(data.password, hashedPassword);
         if (!result) {
@@ -47,7 +49,7 @@ const logIn = async (req, res, next) => {
         }
 
         req.user = user;
-        
+
         return next()
     }
     catch (error) {
@@ -55,7 +57,58 @@ const logIn = async (req, res, next) => {
     }
 }
 
+const addToFavourites = async (req, res, next) => {
+    try {
+        const movie = req.body.movieID;
+        const user = await findUserById(req.user.user_id);
+        user.favourites
+        User.update(
+            { 'favourites': Sequelize.fn('array_append', Sequelize.col('favourites'), movie) },
+            { 'where': { 'user_id': req.user.user_id } }
+           );
+
+        res.end();
+    } catch (error) {
+        return next(error)
+    }
+}
+
+const getFavourites = async (id) => {
+    try {
+        const user = await findUserById(id);
+        return user.favourites
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+const deleteFromFavourites = async (req, res, next) => {
+    console.log('Entered delete fav route')
+    try {
+        const movie = req.body.movieID;
+        const user = await findUserById(req.user.user_id);
+        const favourites = user.favourites;
+        favourites.map((item, index) => {
+            if (item === movie) {
+                favourites.splice(index, 1);
+            }
+        });
+        
+        await User.update({ favourites: favourites }, {
+            where: { user_id: req.user.user_id }
+            });
+
+        res.end()
+        
+    } catch (error) {
+        
+    }
+}
+
 module.exports = {
     signUp,
-    logIn
+    logIn,
+    addToFavourites,
+    getFavourites,
+    deleteFromFavourites
 }
