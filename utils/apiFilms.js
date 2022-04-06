@@ -8,7 +8,6 @@ const getFilmsByTitle = async (title) => {
     try {
         let request = await fetch(`http://www.omdbapi.com/?apikey=${apiKey}&type=movie&s=${title}`); //{}
         let films = await request.json();
-        console.log(films)
         return films.Search // En el array Search[] de la respuesta vienen los datos que necesitamos para pintarlos en la vista pertinente
     } catch (error) {
         console.log(`ERROR: ${error.stack}`);

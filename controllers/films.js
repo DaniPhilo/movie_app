@@ -1,5 +1,5 @@
 const { getFilmsByTitle, getOneFilm } = require('../utils/apiFilms'); //Importamos las funciones de utils
-
+const { findUserById } = require('../utils/sql_functions');
 
 // Controlador de la ruta GET /search/, la cual nos muestra la vista del buscador.
 const showBrowserView = (req, res) => {
@@ -13,8 +13,9 @@ const getListOfFilms = async (req, res) => {
     if (films) { // Si la encuentra, devuelve las películas buscadas por título
         try {
             let response = await getFilmsByTitle(films);
-            console.log(response);
-            res.status(200).render("searchView", { response })
+            const user = await findUserById(req.user.user_id);
+            const favourites = user.favourites;
+            res.status(200).render("searchView", { response, favourites })
         } catch (err) {
             res.status(400).json({ message: err })
         }
@@ -28,10 +29,12 @@ const getSelectedFilm = async (req, res) => {
     let title = req.params.title;
     if (title) {
         try {
-            let response = await getOneFilm(title)
-            console.log(response);
+            const user = await findUserById(req.user.user_id);
+            const favourites = user.favourites;
+
+            let response = await getOneFilm(title);
             let ratings = response.Ratings // En la respuesta viene un array de Ratings, definimos la función
-            res.status(200).render("selectedFilm", { response , ratings}) // y se la pasamos al render para pintarla.
+            res.status(200).render("selectedFilm", { response , ratings, favourites}) // y se la pasamos al render para pintarla.
         } catch (error) {
             res.status(400).json({ message: err })
         }

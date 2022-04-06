@@ -60,6 +60,8 @@ const logIn = async (req, res, next) => {
 const addToFavourites = async (req, res, next) => {
     try {
         const movie = req.body.movieID;
+        const user = await findUserById(req.user.user_id);
+        user.favourites
         User.update(
             { 'favourites': Sequelize.fn('array_append', Sequelize.col('favourites'), movie) },
             { 'where': { 'user_id': req.user.user_id } }
@@ -71,22 +73,26 @@ const addToFavourites = async (req, res, next) => {
     }
 }
 
-const getFavourites = async (req, res, next) => {
+const deleteFromFavourites = async (req, res, next) => {
+    console.log('Entered delete fav route')
     try {
+        const movie = req.body.movieID;
         const user = await findUserById(req.user.user_id);
-        if(!user.favourites) {
-            return next()
-        }
+        const favourites = user.favourites;
+        favourites.map((item, index) => {
+            if (item === movie) {
+                favourites.splice(index, 1);
+            }
+        });
         
-        const favourites = user.favourites.join(' ');
-        console.log(favourites)
+        await User.update({ favourites: favourites }, {
+            where: { user_id: req.user.user_id }
+            });
 
-        res.cookie('favourites', favourites);
-
-        return next()
-    }
-    catch (error) {
-        return next(error)
+        res.end()
+        
+    } catch (error) {
+        
     }
 }
 
@@ -94,5 +100,5 @@ module.exports = {
     signUp,
     logIn,
     addToFavourites,
-    getFavourites
+    deleteFromFavourites
 }

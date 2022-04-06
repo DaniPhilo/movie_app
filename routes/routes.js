@@ -10,7 +10,7 @@ require('../utils/passport_google_auth');
 const express = require('express');
 const router = express.Router();
 
-const { signUp, logIn, addToFavourites, getFavourites, createAccessToken, createRefreshToken, authenticateToken, authenticateRefreshToken, renderRecoveryPage, sendRecoveryEmail, renderRestorePage, restorePassword, googleAuth } = require('../middleware/main_middlewares');
+const { signUp, logIn, addToFavourites, deleteFromFavourites, createAccessToken, createRefreshToken, authenticateToken, authenticateRefreshToken, renderRecoveryPage, sendRecoveryEmail, renderRestorePage, restorePassword, googleAuth } = require('../middleware/main_middlewares');
 
 const {
     toDashboard,
@@ -47,7 +47,6 @@ router.get('/auth/google/callback',
     googleAuth,
     createAccessToken,
     createRefreshToken,
-    getFavourites, 
     toDashboard
 );
 
@@ -83,10 +82,12 @@ router.route('/movies')
     })
     .post(authenticateToken, authenticateRefreshToken, addToFavourites)
 
+router.post('/movies/remove', authenticateToken, authenticateRefreshToken, deleteFromFavourites)
 
-router.post('/signup', signUp, createAccessToken, createRefreshToken, getFavourites, toDashboard);
 
-router.post('/login', logIn, createAccessToken, createRefreshToken, getFavourites, toDashboard);
+router.post('/signup', signUp, createAccessToken, createRefreshToken, toDashboard);
+
+router.post('/login', logIn, createAccessToken, createRefreshToken, toDashboard);
 router.post('/logout', authenticateToken, authenticateRefreshToken, logOut);
 
 router.get('/login/guest',
@@ -97,7 +98,6 @@ router.get('/login/guest',
     },
     createAccessToken,
     createRefreshToken,
-    getFavourites, 
     (req, res) => {
         res.redirect('/search')
     })
@@ -108,7 +108,6 @@ router.get('/login/admin', async (req, res, next) => {
 },
     createAccessToken,
     createRefreshToken,
-    getFavourites, 
     (req, res) => {
         res.redirect('/createMovie')
     });

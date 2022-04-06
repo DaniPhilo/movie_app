@@ -27,5 +27,13 @@ html(lang="en")
                                 p.film__genre #{film.Genre}
                                 p.film__runtime #{film.Runtime}
                                 input(class = "input__show", id = `${film.Title}`,type="button", value="Show details", name="showFilm")
-                                input.input__save(type="button", id=`${film.imdbID}` value="Save as favourite<3")
+                                if favourites.includes(film.imdbID)
+                                    input.input__delete(type="button", id=`${film.imdbID}` value="Saved")
+                                else
+                                    input.input__save(type="button", id=`${film.imdbID}` value="Save as favourite<3")
+
+                    if favourites 
+                        each fav in favourites 
+                            p #{fav}
+
         script(src="/js/searchView.js")
