@@ -16,14 +16,14 @@ const {
     toDashboard,
     showDashboard,
     logOut,
+    goToCreateMovie,
     goToMovies,
     createMovie,
     getMovies,
     getMovie,
     updateMovie,
-    getMoviesDel,
+    getMovieDel,
     deleteMovie,
-    getMovieDel
 } = require('../controllers/controllers');
 
 const { findUserByEmail } = require('../utils/sql_functions');
@@ -64,7 +64,7 @@ router.get('/login/admin', async (req, res, next) => {
     createAccessToken,
     createRefreshToken,
     (req, res) => {
-        res.redirect('/createMovie')
+        res.redirect('/admin/movies')
     });
 
 // Rutas de autenticación con Google:
@@ -82,8 +82,10 @@ router.get('/auth/google/callback',
 
 // Rutas del admin:
 
+router.get("/admin/movies", authenticateToken, authenticateRefreshToken, goToMovies);
+
 router.route("/createMovie")
-    .get(authenticateToken, authenticateRefreshToken, goToMovies)
+    .get(authenticateToken, authenticateRefreshToken, goToCreateMovie)
     .post(authenticateToken, authenticateRefreshToken, createMovie)
 
 router.get("/editMovie", authenticateToken, authenticateRefreshToken, getMovies)
