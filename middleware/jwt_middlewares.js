@@ -1,7 +1,7 @@
 require('dotenv').config();
 
 const { createCookie } = require('../utils/cookies');
-const { findUserById, findUserByEmail } = require('../utils/sql_functions');
+const { findUserById } = require('../utils/sql_functions');
 const jwt = require('jsonwebtoken');
 
 const { ForbiddenError } = require('../errors/errors');

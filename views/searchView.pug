@@ -25,5 +25,5 @@ html(lang="en")
                                 p.film__genre #{film.Genre}
                                 p.film__runtime #{film.Runtime}
                                 input(class = "input__show", id = `${film.Title}`,type="button", value="Show details", name="showFilm")
-                                input.input__save(type="button", value="Save as favourite<3")
+                                input.input__save(type="button", id=`${film.imdbID}` value="Save as favourite<3")
         script(src="/js/searchView.js")

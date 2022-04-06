@@ -10,7 +10,7 @@ require('../utils/passport_google_auth');
 const express = require('express');
 const router = express.Router();
 
-const { signUp, logIn, createAccessToken, createRefreshToken, authenticateToken, authenticateRefreshToken, renderRecoveryPage, sendRecoveryEmail, renderRestorePage, restorePassword, googleAuth } = require('../middleware/main_middlewares');
+const { signUp, logIn, addToFavourites, createAccessToken, createRefreshToken, authenticateToken, authenticateRefreshToken, renderRecoveryPage, sendRecoveryEmail, renderRestorePage, restorePassword, googleAuth } = require('../middleware/main_middlewares');
 
 const {
     toDashboard,
@@ -70,18 +70,19 @@ router.route("/removeMovie/:titulo")
 // Rutas de usuario:
 
 router.route('/search')
-  .get(showBrowserView)
-  .post(getListOfFilms);
+    .get(showBrowserView)
+    .post(getListOfFilms);
 
 router.get('/search/:title', getSelectedFilm);
 
-router.get('/dashboard', authenticateToken, authenticateRefreshToken, showDashboard);
 
-router.get('/movies', (req, res) => {
-    res.render('admin');
-});
+router.route('/movies')
+    .get((req, res) => {
+        res.render('favourites');
+    })
+    .post(authenticateToken, authenticateRefreshToken, addToFavourites)
 
-// POST
+
 router.post('/signup', signUp, createAccessToken, createRefreshToken, toDashboard);
 
 router.post('/login', logIn, createAccessToken, createRefreshToken, toDashboard);

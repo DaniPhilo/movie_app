@@ -1,4 +1,6 @@
-const { createUser, findUserByEmail } = require('../utils/sql_functions');
+const { Sequelize } = require('sequelize');
+const User = require('../models/users_models');
+const { createUser, findUserById, findUserByEmail } = require('../utils/sql_functions');
 const { signUpValidations, loginValidations } = require('../utils/validations');
 const { createHash } = require('../utils/hashing');
 const { BadRequest, AuthenticationError } = require('../errors/errors');
@@ -39,7 +41,7 @@ const logIn = async (req, res, next) => {
         if (!user) {
             throw new AuthenticationError('Wrong email or password');
         }
-        
+
         const hashedPassword = user.password;
         const result = await loginValidations(data.password, hashedPassword);
         if (!result) {
@@ -47,7 +49,7 @@ const logIn = async (req, res, next) => {
         }
 
         req.user = user;
-        
+
         return next()
     }
     catch (error) {
@@ -55,7 +57,22 @@ const logIn = async (req, res, next) => {
     }
 }
 
+const addToFavourites = async (req, res, next) => {
+    try {
+        const movie = req.body.movieID;
+        User.update(
+            { 'favourites': Sequelize.fn('array_append', Sequelize.col('favourites'), movie) },
+            { 'where': { 'user_id': req.user.user_id } }
+           );
+
+        res.end();
+    } catch (error) {
+        return next(error)
+    }
+}
+
 module.exports = {
     signUp,
-    logIn
+    logIn,
+    addToFavourites
 }
