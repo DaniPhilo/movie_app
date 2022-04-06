@@ -6,10 +6,12 @@ html(lang="en")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         title Document
     body
-        if lista
+        button Crear nueva película
+        button(class="editarPeliculas") Editar peliculas
+        if(movieList)
             div
                 ul
-                    each val in lista
+                    each val in movieList
                         li
                             h2 Titulo: #{val.titulo}
                             p Año: #{val.year}
@@ -17,17 +19,4 @@ html(lang="en")
                             p Genero: #{val.genero}
                             p Duración: #{val.duracion}
                             img(src="#{val.imagen}")
-                            button Eliminar
-
-        if movie
-            h1 ¿Estás seguro que deseas eliminar esta pelicula?
-            form(action=`${movie.titulo}` method="POST") 
-                h2 Titulo: #{movie.titulo}
-                p Año: #{movie.year}
-                p Director: #{movie.director}
-                p Genero: #{movie.genero}
-                p Duracion: #{movie.duracion}
-                p Imagen: #{movie.imagen}
-
-                input(type="submit" value="Eliminar")
-            script(src='./js/edit_movies.js')
+        script(src="./js/edit_movies.js") 
