@@ -8,6 +8,8 @@ html(lang="en")
     body 
         header
             h1 Your Film 
+
+            button(type="button" id="logOutBtn" onclick="logOut()") Log Out
         main
             p Title: #{response.Title}
             input.input__save(type="button", id=`${response.imdbID}` value="Save as favourites")

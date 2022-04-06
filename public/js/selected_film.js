@@ -1,5 +1,6 @@
 const saveButton = document.querySelectorAll('.input__save');
 
+// Eventlistener para guardar en favortos
 if (saveButton != null) {
     Array.from(saveButton).map((item) => {
         item.addEventListener('click', async () => {
@@ -18,4 +19,12 @@ if (saveButton != null) {
             }
         })
     })
+}
+
+// Eventlistener para logout:
+const logOut = async () => {
+    await fetch('http://localhost:3000/logout', {
+        method: 'POST'
+    });
+    window.location.href = 'http://localhost:3000'
 }

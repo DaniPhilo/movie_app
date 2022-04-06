@@ -71,8 +71,28 @@ const addToFavourites = async (req, res, next) => {
     }
 }
 
+const getFavourites = async (req, res, next) => {
+    try {
+        const user = await findUserById(req.user.user_id);
+        if(!user.favourites) {
+            return next()
+        }
+        
+        const favourites = user.favourites.join(' ');
+        console.log(favourites)
+
+        res.cookie('favourites', favourites);
+
+        return next()
+    }
+    catch (error) {
+        return next(error)
+    }
+}
+
 module.exports = {
     signUp,
     logIn,
-    addToFavourites
+    addToFavourites,
+    getFavourites
 }

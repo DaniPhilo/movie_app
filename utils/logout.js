@@ -12,6 +12,7 @@ const logOut = async (req, res) => {
 
         deleteCookie(res, 'access_token');
         deleteCookie(res, 'refresh_token');
+        deleteCookie(res, 'favourites');
 
         req.logout();
         req.session.destroy();

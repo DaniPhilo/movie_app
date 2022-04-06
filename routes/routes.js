@@ -10,7 +10,7 @@ require('../utils/passport_google_auth');
 const express = require('express');
 const router = express.Router();
 
-const { signUp, logIn, addToFavourites, createAccessToken, createRefreshToken, authenticateToken, authenticateRefreshToken, renderRecoveryPage, sendRecoveryEmail, renderRestorePage, restorePassword, googleAuth } = require('../middleware/main_middlewares');
+const { signUp, logIn, addToFavourites, getFavourites, createAccessToken, createRefreshToken, authenticateToken, authenticateRefreshToken, renderRecoveryPage, sendRecoveryEmail, renderRestorePage, restorePassword, googleAuth } = require('../middleware/main_middlewares');
 
 const {
     toDashboard,
@@ -47,6 +47,7 @@ router.get('/auth/google/callback',
     googleAuth,
     createAccessToken,
     createRefreshToken,
+    getFavourites, 
     toDashboard
 );
 
@@ -70,22 +71,22 @@ router.route("/removeMovie/:titulo")
 // Rutas de usuario:
 
 router.route('/search')
-    .get(showBrowserView)
-    .post(getListOfFilms);
+    .get(authenticateToken, authenticateRefreshToken, showBrowserView)
+    .post(authenticateToken, authenticateRefreshToken, getListOfFilms);
 
-router.get('/search/:title', getSelectedFilm);
+router.get('/search/:title', authenticateToken, authenticateRefreshToken, getSelectedFilm);
 
 
 router.route('/movies')
-    .get((req, res) => {
+    .get(authenticateToken, authenticateRefreshToken, (req, res) => {
         res.render('favourites');
     })
     .post(authenticateToken, authenticateRefreshToken, addToFavourites)
 
 
-router.post('/signup', signUp, createAccessToken, createRefreshToken, toDashboard);
+router.post('/signup', signUp, createAccessToken, createRefreshToken, getFavourites, toDashboard);
 
-router.post('/login', logIn, createAccessToken, createRefreshToken, toDashboard);
+router.post('/login', logIn, createAccessToken, createRefreshToken, getFavourites, toDashboard);
 router.post('/logout', authenticateToken, authenticateRefreshToken, logOut);
 
 router.get('/login/guest',
@@ -96,6 +97,7 @@ router.get('/login/guest',
     },
     createAccessToken,
     createRefreshToken,
+    getFavourites, 
     (req, res) => {
         res.redirect('/search')
     })
@@ -106,6 +108,7 @@ router.get('/login/admin', async (req, res, next) => {
 },
     createAccessToken,
     createRefreshToken,
+    getFavourites, 
     (req, res) => {
         res.redirect('/createMovie')
     });
