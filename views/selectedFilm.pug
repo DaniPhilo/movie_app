@@ -8,9 +8,15 @@ html(lang="en")
     body 
         header
             include /partials/nav.pug
+
+            button(type="button" id="goBackBtn" onclick="goBack()") Go Back
+            button(type="button" id="logOutBtn" onclick="logOut()") Log Out
         main
-            p Title: #{response.Title}
-            input(type="button", value="Save as favourites")
+            p#movie-title Title: #{response.Title}
+            if favourites.includes(response.imdbID)
+                input.input__delete(type="button", id=`${response.imdbID}` onclick="removeFromFav(event)" value="Saved")
+            else
+                input.input__save(type="button", id=`${response.imdbID}` onclick="saveFav(event)" value="Save as favourites")
             img(src=`${response.Poster}`)
             p Year: #{response.Year}
             p Director: #{response.Director}
@@ -24,3 +30,7 @@ html(lang="en")
                         p Source: #{rating.Source}
                         p Value: #{rating.Value}
             p Viewers reviews: 
+
+
+
+        script(src="/js/selected_film.js")
