@@ -2,11 +2,7 @@ const logOut = require('../utils/logout');
 const Movie = require("../models/Movies")
 
 const toDashboard = (req, res) => {
-    res.redirect('/dashboard')
-}
-
-const showDashboard = (req, res) => {
-    res.render('dashboard')
+    res.redirect('/search')
 }
 
 const goToMovies = (req, res) => {
@@ -93,7 +89,6 @@ async function deleteMovie(req, res){
 
 module.exports = {
     toDashboard,
-    showDashboard,
     logOut,
     goToMovies,
     createMovie, 

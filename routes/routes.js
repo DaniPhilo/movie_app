@@ -14,14 +14,12 @@ const { signUp, logIn, createAccessToken, createRefreshToken, authenticateToken,
 
 const {
     toDashboard,
-    showDashboard,
     logOut,
     goToMovies,
     createMovie,
     getMovies,
     getMovie,
     updateMovie,
-    getMoviesDel,
     deleteMovie,
     getMovieDel
 } = require('../controllers/controllers');
@@ -68,12 +66,10 @@ router.route("/removeMovie/:titulo")
 // Rutas de usuario:
 
 router.route('/search')
-  .get(showBrowserView)
-  .post(getListOfFilms);
+  .get(authenticateToken, authenticateRefreshToken, showBrowserView)
+  .post(authenticateToken, authenticateRefreshToken, getListOfFilms);
 
-router.get('/search/:title', getSelectedFilm);
-
-router.get('/dashboard', authenticateToken, authenticateRefreshToken, showDashboard);
+router.get('/search/:title', authenticateToken, authenticateRefreshToken, getSelectedFilm);
 
 router.get('/movies', (req, res) => {
     res.render('admin');
