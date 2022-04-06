@@ -6,6 +6,8 @@ html(lang="en")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         title Document
     body
+        header 
+            include /partials/nav.pug
         if lista
             div
                 ul
@@ -34,4 +36,8 @@ html(lang="en")
                 p Imagen:
                     input(type="text", value=`${movie.imagen}` name="imagen")
                 input(type="submit" value="Guardar")
+<<<<<<< HEAD
         script(src='./js/edit_movies.js')
+=======
+        script(src='./js/edit_movie.js')
+>>>>>>> 12d3861a7869305b532fca7db2ac444f9ab65642
