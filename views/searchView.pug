@@ -1,7 +1,7 @@
 include nav.pug
 main
-    section
-        form(action="/search", method="POST")
+    section#search__section
+        form#search__form(action="/search", method="POST")
             input(type="text", name="filmBrowser", placeholder="Busca tu película", required)
             input(type="submit", value="Search")
 
@@ -17,10 +17,14 @@ main
                     div.film__buttons
                         input(class = "input__show" id = `${film.Title || film.titulo}` type="button" value="Show details" onclick="goToMovie(event)")
                         if !favourites
-                            input.input__save(type="button", id=`${film.imdbID || film._id}` onclick="saveFav(event)" value="Save as favourite<3")
+                            i(class="fa-solid fa-thumbs-up" id=`${film.imdbID || film._id}` onclick="saveFav(event)")
+                            //- input.input__save(type="button", id=`${film.imdbID || film._id}` onclick="saveFav(event)" value="Save as favourite<3")
                         else if favourites.includes(film.imdbID)
-                            input.input__delete(type="button", id=`${film.imdbID || film._id}` onclick="removeFromFav(event)" value="Saved") 
+                            i(class="fa-solid fa-thumbs-up fav" id=`${film.imdbID || film._id}` onclick="removeFromFav(event)")
+                            //- input.input__delete(type="button", id=`${film.imdbID || film._id}` onclick="removeFromFav(event)" value="Saved") 
                         else
-                            input.input__save(type="button", id=`${film.imdbID || film._id}` onclick="saveFav(event)" value="Save as favourite<3")
+                            i(class="fa-solid fa-thumbs-up" id=`${film.imdbID || film._id}` onclick="saveFav(event)")
+                            //- input.input__save(type="button", id=`${film.imdbID || film._id}` onclick="saveFav(event)" value="Save as favourite<3")
+
 
 script(src="/js/searchView.js")

@@ -22,14 +22,12 @@ const getListOfFilms = async (req, res) => {
 
             if (mongoResponse.length > 0 && response) {
                 response = mongoResponse.concat(response)
-                console.log('From loop')
             }
             else if (mongoResponse.length > 0) {
                 response = mongoResponse;
             }
             const user = await findUserById(req.user.user_id);
             const favourites = user.favourites;
-            console.log(response)
             res.status(200).render("searchView", { response, favourites })
         } catch (err) {
             res.status(400).json({ message: err })

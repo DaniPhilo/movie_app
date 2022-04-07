@@ -38,7 +38,7 @@ html(lang="en")
                 div.film__detail__buttons
                     if !favourites
                         input.input__save(type="button", id=`${response.imdbID || response[0]._id}` onclick="saveFav(event)" value="Save as favourites")
-                    if favourites.includes(response.imdbID) || favourites.includes(response[0]._id)
+                    if favourites.includes(response.imdbID)
                         input.input__delete(type="button", id=`${response.imdbID || response[0]._id}` onclick="removeFromFav(event)" value="Saved")
                     else
                         input.input__save(type="button", id=`${response.imdbID || response[0]._id}` onclick="saveFav(event)" value="Save as favourites")

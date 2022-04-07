@@ -19,7 +19,7 @@ const createAccessToken = (req, res, next) => {
 
 const createRefreshToken = async (req, res, next) => {
     try {
-        const refreshToken = jwt.sign({ user_id: req.user.user_id }, process.env.REFRESH_TOKEN_SECRET, { expiresIn: '1d' });
+        const refreshToken = jwt.sign({ user_id: req.user.user_id }, process.env.REFRESH_TOKEN_SECRET, { expiresIn: '24h' });
         const user = await findUserById(req.user.user_id);
         user.refresh_token = refreshToken;
         await user.save();

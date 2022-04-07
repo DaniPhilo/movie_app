@@ -14,7 +14,7 @@ main
                         p.film__runtime #{movie.Runtime || movie.duracion}
                     div.film__buttons
                         input(class = "input__show", id = `${movie.Title || movie.titulo}`,type="button" value="Show details", name="showFilm" onclick="goToMovie(event)")
-                        input.input__delete(type="button", id=`${movie.imdbID || movie._id}` onclick="removeFromFav(event)" value="Saved")
+                        i.input__delete(type="button" class="fa-solid fa-thumbs-up fav" id=`${movie.imdbID || movie._id}` onclick="removeFromFav(event)" value="Saved")
 
                         
 script(src="/js/favourites.js")
