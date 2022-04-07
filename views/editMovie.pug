@@ -10,18 +10,19 @@ html(lang="en")
     body 
         header 
             nav(class = "navbar")
-                a(href = "/search", class = "nav__branding") THE MOVIES APP 
-                ul(class = "nav__menu") 
+                a(href = "/admin", class = "nav__branding") THE MOVIES APP 
+                ul(class = "nav__menu" id = "nav__menu__admin") 
                     li(class = "nav__item")
-                        p(href = "#Cerrar sesión", class = "nav__link", onclick="logOut()")
-                            i(class = "bx bx-log-out") Cerrar Sesión
+                        p(href = "#Cerrar sesión", class = "nav__link", onclick="logOut()") Cerrar Sesión
+                            i(class = "bx bx-log-out")
                 div(class = "hamburguer")
                     span.bar 
                     span.bar 
                     span.bar
         main
             p(id="add-button", onclick="goToAddMovie()")
-                i(class='bx bx-arrow-back') Go back!
+                a(href="/admin") 
+                    i(class='bx bx-arrow-back', id = "back__button")
             if success 
                 p #{success.message}
 

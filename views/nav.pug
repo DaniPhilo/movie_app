@@ -7,23 +7,24 @@ html(lang="en")
         title Document
         link(rel="stylesheet", href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css")
         link(rel="stylesheet", href="css/styles.css")
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
     body 
         header 
             nav(class = "navbar")
-                a(href = "/search", class = "nav__branding") THE MOVIES APP 
+                a(href = "/search", class = "nav__branding") #[span THE] MOVIES APP 
                 ul(class = "nav__menu")
                     li(class = "nav__item")
-                        a(href = "/search", class = "nav__link") 
-                            i(class = "bx bx-home") Home
+                        a(href = "/search", class = "nav__link") Home
+                            i(class = "bx bx-home")
                     li(class = "nav__item")
-                        a(href = "/search", class = "nav__link")
-                            i(class = 'bx bx-search') Movie browser
+                        a(href = "/search", class = "nav__link") Movie browser
+                            i(class = 'bx bx-search') 
                     li(class = "nav__item")
-                        a(href = "/movies", class = "nav__link")
-                            i(class = 'bx bx-heart') Your movies 
+                        a(href = "/movies", class = "nav__link") Your movies 
+                            i(class = 'bx bx-heart')
                     li(class = "nav__item")
-                        p(href = "#Cerrar sesión", class = "nav__link", onclick="logOut()")
-                            i(class = "bx bx-log-out") Cerrar Sesión
+                        p(href = "#Cerrar sesión", class = "nav__link", onclick="logOut()") Cerrar Sesión
+                            i(class = "bx bx-log-out") 
                 div(class = "hamburguer")
                     span.bar 
                     span.bar 
