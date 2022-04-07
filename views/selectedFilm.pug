@@ -29,18 +29,20 @@ html(lang="en")
                     span.bar 
                     span.bar
         main
-            p(type="button" id="goBackBtn" onclick="goBack()") 
-                i(class='bx bx-arrow-back') Go Back!
-            p#movie-title Title: #{response.Title}
-            if favourites.includes(response.imdbID)
-                input.input__delete(type="button", id=`${response.imdbID}` onclick="removeFromFav(event)" value="Saved")
+            p#movie-title Title: #{response.Title || response[0].titulo}
+            if !favourites
+                input.input__save(type="button", id=`${response.imdbID || response[0]._id}` onclick="saveFav(event)" value="Save as favourites")
+            if favourites.includes(response.imdbID) || favourites.includes(response[0]._id)
+                input.input__delete(type="button", id=`${response.imdbID || response[0]._id}` onclick="removeFromFav(event)" value="Saved")
+
             else
-                input.input__save(type="button", id=`${response.imdbID}` onclick="saveFav(event)" value="Save as favourites")
-            img(src=`${response.Poster}`)
-            p Year: #{response.Year}
-            p Director: #{response.Director}
-            p Genre: #{response.Genre}
-            p Runtime: #{response.Runtime}
+                input.input__save(type="button", id=`${response.imdbID || response[0]._id}` onclick="saveFav(event)" value="Save as favourites")
+            img(src=`${response.Poster || response[0].imagen}`)
+            
+            p Year: #{response.Year || response[0].year}
+            p Director: #{response.Director ||response[0].director}
+            p Genre: #{response.Genre || response[0].genero}
+            p Runtime: #{response.Runtime || response[0].duracion}
             p Plot: #{response.Plot}
             p Cast: #{response.Actors}
             p Rating:

@@ -18,7 +18,7 @@ const getFilmsByTitle = async (title) => {
 // Petición de la vista detallada de una de las películas
 const getOneFilm = async (title) => {
     try {
-        let response = await fetch(`http://www.omdbapi.com/?t=${title}&apikey=${apiKey}`)
+        let response = await fetch(`http://www.omdbapi.com/?t=${title}&plot=full&apikey=${apiKey}`)
         let info = await response.json();
         return info
     } catch (error) {
