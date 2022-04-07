@@ -14,6 +14,7 @@ const { NotFoundError, BadRequest, AuthenticationError } = require('./errors/err
 
 // Inicializar el servidor
 const express = require('express');
+const path = require('path')
 const session = require('express-session');
 const passport = require('passport');
 
@@ -22,12 +23,12 @@ const filmRouter = require('./routes/routes');
 const app = express();
 
 // Puerto a usar por la página
-const port = process.env.PORT;
+const port = process.env.PORT || 3000
 
 app.set('view engine', 'pug');
-app.set('views', './views');
+app.set('views', path.join(__dirname, 'views'))
 
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(session({ secret: process.env.SESSION_SECRET }));

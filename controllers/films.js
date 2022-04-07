@@ -82,8 +82,8 @@ const getScrapping = async (req, res) => {
     const title = req.params.title;
 
     console.log(title)
-
-    const browser = await puppeteer.launch();
+    
+    const browser = await puppeteer.launch({headless: true, args: ["--no-sandbox"]});
     const page = await browser.newPage();
     await page.goto(`https://letterboxd.com/search/${title}`, { waitUntil: ['load'] });
 
