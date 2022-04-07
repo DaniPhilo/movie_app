@@ -9,7 +9,6 @@ html(lang="en")
         header
             include nav.pug
             button(type="button" id="goBackBtn" onclick="goBack()") Go Back
-            button(type="button" id="logOutBtn" onclick="logOut()") Log Out
         main
             p#movie-title Title: #{response.Title}
             if favourites.includes(response.imdbID)
