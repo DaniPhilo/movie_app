@@ -1,39 +1,23 @@
-doctype html
-html(lang="en")
-    head
-        meta(charset="UTF-8")
-        meta(http-equiv="X-UA-Compatible", content="IE=edge")
-        meta(name="viewport", content="width=device-width, initial-scale=1.0")
-        title Crear película
-    body 
+include ./nav.pug
+main
+    p(type="button" onclick="goBackBtn()") 
+        i(class='bx bx-arrow-back') Go back!
+    if success 
+        p #{success}
 
-        header 
-            button(type="button" onclick="goBackBtn()") Go Back
+    form(action="/createMovie" method="POST")
+        label(for="titulo") Titulo 
+        input(type="text" placeholder="Ej: Titanic" name="titulo")
+        label(for="year") Año 
+        input(type="text" placeholder="Ej: 1997" name="year")
+        label(for="director") Director 
+        input(type="text" placeholder="Ej: James Cameron" name="director")
+        label(for="genero") Genero 
+        input(type="text" placeholder="Ej: Drama/Romance"   name="genero")
+        label(for="duracion") Duración 
+        input(type="text" placeholder="Ej: 195 mins" name="duracion")
+        label(for="imagen") Imagen 
+        input(type="text" name="imagen")
+        input(type="submit")
 
-
-        main
-            if success 
-                p #{success}
-
-            form(action="/createMovie" method="POST")
-                label(for="titulo") Titulo 
-                input(type="text" placeholder="Ej: Titanic" name="titulo")
-        if success 
-            p #{success}
-
-        form(action="/createMovie" method="POST")
-            label(for="titulo") Titulo 
-            input(type="text" placeholder="Ej: Titanic" name="titulo")
-            label(for="year") Año 
-            input(type="text" placeholder="Ej: 1997" name="year")
-            label(for="director") Director 
-            input(type="text" placeholder="Ej: James Cameron" name="director")
-            label(for="genero") Genero 
-            input(type="text" placeholder="Ej: Drama/Romance" name="genero")
-            label(for="duracion") Duración 
-            input(type="text" placeholder="Ej: 195 mins" name="duracion")
-            label(for="imagen") Imagen 
-            input(type="text" name="imagen")
-            input(type="submit")
-
-        script(src="/js/create_movie.js")
+script(src="/js/create_movie.js")

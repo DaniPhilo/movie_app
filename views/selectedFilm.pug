@@ -4,12 +4,33 @@ html(lang="en")
         meta(charset="UTF-8")
         meta(http-equiv="X-UA-Compatible", content="IE=edge")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
-        title 
+        title Document
+        link(rel="stylesheet", href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css")
+        link(rel="stylesheet", href="../css/styles.css")
     body 
-        header
-            include nav.pug
-            button(type="button" id="goBackBtn" onclick="goBack()") Go Back
+        header 
+            nav(class = "navbar")
+                a(href = "/search", class = "nav__branding") THE MOVIES APP 
+                ul(class = "nav__menu")
+                    li(class = "nav__item")
+                        a(href = "/search", class = "nav__link") 
+                            i(class = "bx bx-home") Home
+                    li(class = "nav__item")
+                        a(href = "/search", class = "nav__link")
+                            i(class = 'bx bx-search') Movie browser
+                    li(class = "nav__item")
+                        a(href = "/movies", class = "nav__link")
+                            i(class = 'bx bx-heart') Your movies 
+                    li(class = "nav__item")
+                        p(href = "#Cerrar sesión", class = "nav__link", onclick="logOut()")
+                            i(class = "bx bx-log-out") Cerrar Sesión
+                div(class = "hamburguer")
+                    span.bar 
+                    span.bar 
+                    span.bar
         main
+            p(type="button" id="goBackBtn" onclick="goBack()") 
+                i(class='bx bx-arrow-back') Go Back!
             p#movie-title Title: #{response.Title}
             if favourites.includes(response.imdbID)
                 input.input__delete(type="button", id=`${response.imdbID}` onclick="removeFromFav(event)" value="Saved")
@@ -30,5 +51,5 @@ html(lang="en")
             p Viewers reviews: 
 
 
-
-        script(src="/js/selected_film.js")
+script(src="/js/burger.js")
+script(src="/js/selected_film.js")

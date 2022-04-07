@@ -42,6 +42,7 @@ li.nav__item{
 }
 
 .nav__branding{
+    text-decoration: none;
     font-size: 2rem;
 }
 

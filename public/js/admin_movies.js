@@ -1,4 +1,3 @@
-
 const goToAddMovie = () => {
     window.location.href = `http://localhost:3000/createMovie`;
 }
@@ -12,3 +11,4 @@ const toDeleteMovie = (event) => {
     const titulo = event.target.getAttribute('id');
     window.location.href = `http://localhost:3000/removeMovie/${titulo}`;
 }
+
