@@ -7,9 +7,7 @@ html(lang="en")
         title Document
     body 
         header
-            h1 Header
-
-            button(type="button" id="logOutBtn" onclick="logOut()") Log Out
+            include nav.pug
         main 
             h1 Favourites movies
 
@@ -25,5 +23,4 @@ html(lang="en")
                         input(class = "input__show", id = `${movie.Title}`,type="button" value="Show details", name="showFilm" onclick="goToMovie(event)")
                         input.input__delete(type="button", id=`${movie.imdbID}` onclick="removeFromFav(event)" value="Saved")
                         
-
         script(src="/js/favourites.js")

@@ -7,7 +7,7 @@ html(lang="en")
         title Document
     body
         header 
-            include /partials/nav.pug
+            include nav.pug
         if lista
             div
                 ul
@@ -36,4 +36,4 @@ html(lang="en")
                 p Imagen:
                     input(type="text", value=`${movie.imagen}` name="imagen")
                 input(type="submit" value="Guardar")
-        script(src='./js/edit_movie.js')
+        script(src='./js/edit_movies.js')

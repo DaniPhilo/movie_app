@@ -5,8 +5,12 @@ html(lang="en")
         meta(http-equiv="X-UA-Compatible", content="IE=edge")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         title 404 Error
+    header 
+        include nav.pug
     body 
         p 404 Error: the requested route does not exist.
         button(type="button" onclick="goToIndex()") Go Back
 
+
+        
     script(src="./js/error.js")

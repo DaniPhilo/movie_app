@@ -4,10 +4,10 @@ html(lang="en")
         meta(charset="UTF-8")
         meta(http-equiv="X-UA-Compatible", content="IE=edge")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
-        title Document
+        title Crear película
     body 
         header
-            include /partials/nav.pug
+            include nav.pug
         main
             if success 
                 p #{success}
@@ -26,3 +26,5 @@ html(lang="en")
                 label(for="imagen") Imagen 
                 input(type="text" name="imagen")
                 input(type="submit")
+                
+            script(src="js/burguer.js")

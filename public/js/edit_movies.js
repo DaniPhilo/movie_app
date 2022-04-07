@@ -1,5 +1,3 @@
-console.log("Hola");
-
 const botonEliminar = document.querySelectorAll(".botonEliminar");
 botonEliminar.forEach(boton=>{
     boton.addEventListener('click', e=>{
