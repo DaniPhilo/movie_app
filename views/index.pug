@@ -11,19 +11,20 @@ html(lang="en")
             h1 Header
         main
             if !action
-                div#buttons-container
-                    button(type="button" id="signup-btn" onclick="toSignUp()") Sign Up
-                    button(type="button" id="login-btn" onclick="toLogIn()") Log In
-                    button(type="button" id="login-btn" onclick="toGoogleLogIn()") Sign In with Google <i class="fa-brands fa-google"></i>
-
-                    button(type="button" id="signup-btn" onclick="toGuestLogin()") Guest
-                    button(type="button" id="login-btn" onclick="toAdminLogin()") Admin
+                section#buttons__section
+                    div#login__buttons
+                        button(type="button" id="signup-btn" onclick="toSignUp()") Sign Up
+                        button(type="button" id="login-btn" onclick="toLogIn()") Log In
+                        button(type="button" id="login-btn" onclick="toGoogleLogIn()") Sign In with Google <i class="fa-brands fa-google"></i>
+                    div#admin__buttons
+                        button(type="button" id="signup-btn" onclick="toGuestLogin()") Guest
+                        button(type="button" id="login-btn" onclick="toAdminLogin()") Admin
 
             else if action === 'signup'
                 button(type="button" id="back-btn" onclick="goBack()") Go Back
                 if error && error.status === 400
                     p #{error.message}
-                div#signup-container
+                div#form-container
                     h2 Sign Up 
                     form(action="/signup" method="POST")
                 
@@ -39,13 +40,13 @@ html(lang="en")
                         label(for="signup-password2") Repeat Password:
                         input(type="password" name="signup-password2" id="signup-password2")
 
-                        input(type="submit" value="Sign Up")
+                        input(type="submit" id="form-btn" value="Sign Up")
             
             else if action === 'login'
                 button(type="button" id="back-btn" onclick="goBack()") Go Back
                 if error && error.status === 401
                    p #{error.message}
-                div#login-container
+                div#form-container
                     h2 Log In
                     form(action="/login" method="POST")
                 
@@ -55,7 +56,7 @@ html(lang="en")
                         label(for="login-password") Password:
                         input(type="password" name="login-password" id="login-password")
 
-                        input(type="submit" value="Log In")
+                        input(type="submit" id="form-btn" value="Log In")
 
                     a(href="/recoverpassword") I forgot my password
 

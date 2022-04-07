@@ -29,28 +29,32 @@ html(lang="en")
                     span.bar 
                     span.bar
         main
-            p#movie-title Title: #{response.Title || response[0].titulo}
-            if !favourites
-                input.input__save(type="button", id=`${response.imdbID || response[0]._id}` onclick="saveFav(event)" value="Save as favourites")
-            if favourites.includes(response.imdbID) || favourites.includes(response[0]._id)
-                input.input__delete(type="button", id=`${response.imdbID || response[0]._id}` onclick="removeFromFav(event)" value="Saved")
-
-            else
-                input.input__save(type="button", id=`${response.imdbID || response[0]._id}` onclick="saveFav(event)" value="Save as favourites")
-            img(src=`${response.Poster || response[0].imagen}`)
-            
-            p Year: #{response.Year || response[0].year}
-            p Director: #{response.Director ||response[0].director}
-            p Genre: #{response.Genre || response[0].genero}
-            p Runtime: #{response.Runtime || response[0].duracion}
-            p Plot: #{response.Plot}
-            p Cast: #{response.Actors}
-            p Rating:
-                each rating in ratings
-                    div
-                        p Source: #{rating.Source}
-                        p Value: #{rating.Value}
-            p Viewers reviews: 
+            div.film__detail__container
+                img(src=`${response.Poster || response[0].imagen}`)
+                div.film__detail__texts
+                    h2#movie-title Title: #{response.Title || response[0].titulo}
+                    p Year: #{response.Year || response[0].year}
+                    p Director: #{response.Director ||response[0].director}
+                div.film__detail__buttons
+                    if !favourites
+                        input.input__save(type="button", id=`${response.imdbID || response[0]._id}` onclick="saveFav(event)" value="Save as favourites")
+                    if favourites.includes(response.imdbID) || favourites.includes(response[0]._id)
+                        input.input__delete(type="button", id=`${response.imdbID || response[0]._id}` onclick="removeFromFav(event)" value="Saved")
+                    else
+                        input.input__save(type="button", id=`${response.imdbID || response[0]._id}` onclick="saveFav(event)" value="Save as favourites")
+                div.film__detail__info
+                    p Genre: #{response.Genre || response[0].genero}
+                    p Runtime: #{response.Runtime || response[0].duracion} 
+                    p Cast: #{response.Actors}
+                    p Plot: #{response.Plot}
+           
+                    p Rating:
+                        each rating in ratings
+                            div
+                                p Source: #{rating.Source}
+                                p Value: #{rating.Value}
+                div.film__detail__reviews
+                    p Viewers reviews: 
 
 
 script(src="/js/burger.js")
