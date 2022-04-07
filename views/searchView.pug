@@ -18,7 +18,9 @@ main
                         input(class = "input__show", id = `${film.Title}`,type="button", value="Show details", name="showFilm" onclick="goToMovie(event)")
                         if !favourites
                             input.input__save(type="button", id=`${film.imdbID}` onclick="saveFav(event)" value="Save as favourite<3")
-                        else
+                        else if favourites.includes(film.imdbID)
                             input.input__delete(type="button", id=`${film.imdbID}` onclick="removeFromFav(event)" value="Saved")
+                        else 
+                            input.input__save(type="button", id=`${film.imdbID}` onclick="saveFav(event)" value="Save as favourite<3")
                                     
 script(src="/js/searchView.js")
