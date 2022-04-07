@@ -2,17 +2,19 @@ include nav.pug
 main 
     h1 Favourites movies
 
-    if movies 
-        each movie in movies
-            div.film__container
-                p.film__title #{movie.Title || movie.titulo}
-                img.film__img(src=`${movie.Poster || movie.imagen}`)
-                p.film__year #{movie.Year || movie.year}
-                p.film__director #{movie.Director || movie.director}
-                p.film__genre #{movie.Genre || movie.genero}
-                p.film__runtime #{movie.Runtime || movie.duracion}
-                input(class = "input__show", id = `${movie.Title || movie.titulo}`,type="button" value="Show details", name="showFilm" onclick="goToMovie(event)")
-                input.input__delete(type="button", id=`${movie.imdbID || movie._id}` onclick="removeFromFav(event)" value="Saved")
+    section.films__section
+        if movies 
+            each movie in movies
+                div.film__container
+                    img.film__img(src=`${movie.Poster || movie.imagen}`)
+                    div.film__texts
+                        h3.film__title #{movie.Title || movie.titulo}
+                        p.film__year #{movie.Year || movie.year}
+                        p.film__director #{movie.Director || movie.director}
+                        p.film__runtime #{movie.Runtime || movie.duracion}
+                    div.film__buttons
+                        input(class = "input__show", id = `${movie.Title || movie.titulo}`,type="button" value="Show details", name="showFilm" onclick="goToMovie(event)")
+                        i.input__delete(type="button" class="fa-solid fa-thumbs-up fav" id=`${movie.imdbID || movie._id}` onclick="removeFromFav(event)" value="Saved")
 
                         
 script(src="/js/favourites.js")

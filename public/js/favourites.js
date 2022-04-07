@@ -37,7 +37,7 @@ const removeFromFav = async (event) => {
             body: JSON.stringify({ movieID: buttonID })
         });
 
-        const div = event.target.parentElement;
+        const div = event.target.parentElement.parentElement;
         div.remove();
     }
     catch (error) {

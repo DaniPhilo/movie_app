@@ -48,11 +48,6 @@ const goBack = () => {
 
 const getReviews = async () => {
     let text = document.querySelector('#movie-title').innerText;
-    let button = document.querySelector('main > button');
-    let id = button.getAttribute('id');
-    if (id.length < 25) {
-        return []
-    }
 
     let title = text.replace(/Title: /gi, '');
     let parsedTitle = title.includes(' ') ? title.replace(/\s/gi, '-') : title;
@@ -84,9 +79,10 @@ getReviews()
 .then((reviews) => {
     reviews.forEach(review => {
         const comment = document.createElement('div');
+        comment.classList.add('review');
         comment.innerHTML = `<h3>${review.name}</h3>
                              <p>${review.text}</p>`;
-        const main = document.querySelector('main');
-        main.appendChild(comment);
+        const section = document.querySelector('.film__detail__reviews');
+        section.appendChild(comment);
     });
 });
