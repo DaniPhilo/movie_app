@@ -38,10 +38,15 @@ app.use(cookieParser());
 app.use("/", filmRouter);
 
 // Error handlers
+
 app.use((error, req, res, next) => {
     if (error.status === 400 && error.type === 'signup') {
         console.log(`Error from error handler in server: ${error.status} ${error.name}: ${error.type} -- ${error.message}`)
         return res.status(400).render('index', {action: 'signup', error: error})
+    }
+    else if (error.status === 400 && error.type === 'invalid movie') {
+        console.log(`Error from error handler in server: ${error.status} ${error.name}: ${error.type} -- ${error.message}`)
+        return res.status(400).render('createMovie', {error: error})
     }
     else if (error.status === 400 && error.type === 'recovery') {
         console.log(`Error from error handler in server: ${error.status} ${error.name}: ${error.type} -- ${error.message}`)
