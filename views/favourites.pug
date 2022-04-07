@@ -1,13 +1,7 @@
-doctype html
-html(lang="en")
-    head
-        meta(charset="UTF-8")
-        meta(http-equiv="X-UA-Compatible", content="IE=edge")
-        meta(name="viewport", content="width=device-width, initial-scale=1.0")
-        title Document
-    body 
-        header
-            h1 Header
+include nav.pug
+main 
+    h1 Favourites movies
+
 
             button(type="button" id="logOutBtn" onclick="logOut()") Log Out
         main 
@@ -24,6 +18,6 @@ html(lang="en")
                         p.film__runtime #{movie.Runtime || movie.duracion}
                         input(class = "input__show", id = `${movie.Title || movie.titulo}`,type="button" value="Show details", name="showFilm" onclick="goToMovie(event)")
                         input.input__delete(type="button", id=`${movie.imdbID || movie._id}` onclick="removeFromFav(event)" value="Saved")
-                        
 
-        script(src="/js/favourites.js")
+                        
+script(src="/js/favourites.js")

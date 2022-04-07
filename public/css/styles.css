@@ -1,27 +1,28 @@
-* {
+*{
     padding: 0;
     margin: 0;
     box-sizing: border-box;
 }
 
-header {
+header{
     background-color: #213659;
 }
 
 
 /* NAVBAR */
 
-li.nav__item {
+li.nav__item{
     list-style: none;
 }
 
-a.nav__link {
+.nav__link{
     color: white;
     text-decoration: none;
     transition: 0.7s ease;
+    cursor: pointer;
 }
 
-a.nav__link:hover{
+.nav__link:hover{
     color: #8C89BE;
 }
 
@@ -41,6 +42,7 @@ a.nav__link:hover{
 }
 
 .nav__branding{
+    text-decoration: none;
     font-size: 2rem;
 }
 
@@ -88,7 +90,7 @@ a.nav__link:hover{
         text-align: center;
         transition: 0.3s;
     }
-
+    
     .nav__item{
         margin: 16px 0;
     }

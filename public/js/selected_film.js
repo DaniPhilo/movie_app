@@ -40,14 +40,6 @@ const removeFromFav = async (event) => {
     }
 }
 
-// Eventlistener para logout:
-const logOut = async () => {
-    await fetch('http://localhost:3000/logout', {
-        method: 'POST'
-    });
-    window.location.href = 'http://localhost:3000'
-}
-
 const goBack = () => {
     window.location.href = 'http://localhost:3000/search'
 }

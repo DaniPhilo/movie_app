@@ -5,11 +5,23 @@ html(lang="en")
         meta(http-equiv="X-UA-Compatible", content="IE=edge")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         title Document
-    body
+        link(rel="stylesheet", href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css")
+        link(rel="stylesheet", href="../css/styles.css")
+    body 
         header 
-            include ./nav.pug
-
+            nav(class = "navbar")
+                a(href = "/search", class = "nav__branding") THE MOVIES APP 
+                ul(class = "nav__menu") 
+                    li(class = "nav__item")
+                        p(href = "#Cerrar sesión", class = "nav__link", onclick="logOut()")
+                            i(class = "bx bx-log-out") Cerrar Sesión
+                div(class = "hamburguer")
+                    span.bar 
+                    span.bar 
+                    span.bar
         main
+            p(id="add-button", onclick="goToAddMovie()")
+                i(class='bx bx-arrow-back') Go back!
             if success 
                 p #{success.message}
 
@@ -36,4 +48,5 @@ html(lang="en")
                     input(type="submit" value="Save")
 
 
-        script(src='./js/edit_movie.js')
+script(src='/js/admin_movies.js')
+script(src="/js/burger.js")
