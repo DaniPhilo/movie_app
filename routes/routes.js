@@ -64,7 +64,7 @@ router.get('/login/admin', async (req, res, next) => {
     createAccessToken,
     createRefreshToken,
     (req, res) => {
-        res.redirect('/admin/movies')
+        res.redirect('/admin')
     });
 
 // Rutas de autenticación con Google:
@@ -82,7 +82,7 @@ router.get('/auth/google/callback',
 
 // Rutas del admin:
 
-router.get("/admin/movies", authenticateToken, authenticateRefreshToken, goToMovies);
+router.get("/admin", authenticateToken, authenticateRefreshToken, goToMovies);
 
 router.route("/createMovie")
     .get(authenticateToken, authenticateRefreshToken, goToCreateMovie)

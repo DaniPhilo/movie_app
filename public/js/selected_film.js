@@ -56,6 +56,12 @@ const goBack = () => {
 
 const getReviews = async () => {
     let text = document.querySelector('#movie-title').innerText;
+    let button = document.querySelector('main > button');
+    let id = button.getAttribute('id');
+    if (id.length < 25) {
+        return []
+    }
+
     let title = text.replace(/Title: /gi, '');
     let parsedTitle = title.includes(' ') ? title.replace(/\s/gi, '-') : title;
 

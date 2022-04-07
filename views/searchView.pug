@@ -19,16 +19,18 @@ html(lang="en")
                     if response 
                         each film in response 
                             div.film__container
-                                p.film__title #{film.Title}
-                                img.film__img(src=`${film.Poster}`)
-                                p.film__year #{film.Year}
-                                p.film__director #{film.Director}
+                                p.film__title #{film.Title ||film.titulo}
+                                img.film__img(src=`${film.Poster || film.imagen}`)
+                                p.film__year #{film.Year || film.year}
+                                p.film__director #{film.Director || film.director}
                                 p.film__genre #{film.Genre}
                                 p.film__runtime #{film.Runtime}
-                                input(class = "input__show", id = `${film.Title}`,type="button", value="Show details", name="showFilm" onclick="goToMovie(event)")
-                                if favourites.includes(film.imdbID)
-                                    input.input__delete(type="button", id=`${film.imdbID}` onclick="removeFromFav(event)" value="Saved")
+                                input(class = "input__show", id = `${film.Title || film.titulo}`,type="button", value="Show details", name="showFilm" onclick="goToMovie(event)")
+                                if !favourites
+                                    input.input__save(type="button", id=`${film.imdbID || film._id}` onclick="saveFav(event)" value="Save as favourite<3")
+                                else if favourites.includes(film.imdbID)
+                                    input.input__delete(type="button", id=`${film.imdbID || film._id}` onclick="removeFromFav(event)" value="Saved") 
                                 else
-                                    input.input__save(type="button", id=`${film.imdbID}` onclick="saveFav(event)" value="Save as favourite<3")
+                                    input.input__save(type="button", id=`${film.imdbID || film._id}` onclick="saveFav(event)" value="Save as favourite<3")
 
         script(src="/js/searchView.js")
