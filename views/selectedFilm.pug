@@ -1,0 +1,57 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Document
+        link(rel="stylesheet", href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css")
+        link(rel="stylesheet", href="../css/styles.css")
+    body 
+        header 
+            nav(class = "navbar")
+                a(href = "/search", class = "nav__branding") THE MOVIES APP 
+                ul(class = "nav__menu")
+                    li(class = "nav__item")
+                        a(href = "/search", class = "nav__link") 
+                            i(class = "bx bx-home") Home
+                    li(class = "nav__item")
+                        a(href = "/search", class = "nav__link")
+                            i(class = 'bx bx-search') Movie browser
+                    li(class = "nav__item")
+                        a(href = "/movies", class = "nav__link")
+                            i(class = 'bx bx-heart') Your movies 
+                    li(class = "nav__item")
+                        p(href = "#Cerrar sesión", class = "nav__link", onclick="logOut()")
+                            i(class = "bx bx-log-out") Cerrar Sesión
+                div(class = "hamburguer")
+                    span.bar 
+                    span.bar 
+                    span.bar
+        main
+            p#movie-title Title: #{response.Title || response[0].titulo}
+            if !favourites
+                input.input__save(type="button", id=`${response.imdbID || response[0]._id}` onclick="saveFav(event)" value="Save as favourites")
+            if favourites.includes(response.imdbID) || favourites.includes(response[0]._id)
+                input.input__delete(type="button", id=`${response.imdbID || response[0]._id}` onclick="removeFromFav(event)" value="Saved")
+
+            else
+                input.input__save(type="button", id=`${response.imdbID || response[0]._id}` onclick="saveFav(event)" value="Save as favourites")
+            img(src=`${response.Poster || response[0].imagen}`)
+            
+            p Year: #{response.Year || response[0].year}
+            p Director: #{response.Director ||response[0].director}
+            p Genre: #{response.Genre || response[0].genero}
+            p Runtime: #{response.Runtime || response[0].duracion}
+            p Plot: #{response.Plot}
+            p Cast: #{response.Actors}
+            p Rating:
+                each rating in ratings
+                    div
+                        p Source: #{rating.Source}
+                        p Value: #{rating.Value}
+            p Viewers reviews: 
+
+
+script(src="/js/burger.js")
+script(src="/js/selected_film.js")

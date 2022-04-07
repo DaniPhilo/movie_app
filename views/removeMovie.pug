@@ -1,0 +1,39 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Document
+        link(rel="stylesheet", href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css")
+        link(rel="stylesheet", href="../css/styles.css")
+    body 
+        header 
+            nav(class = "navbar")
+                a(href = "/search", class = "nav__branding") THE MOVIES APP 
+                ul(class = "nav__menu")
+                    li(class = "nav__item")
+                        p(href = "#Cerrar sesión", class = "nav__link", onclick="logOut()")
+                            i(class = "bx bx-log-out") Cerrar Sesión
+                div(class = "hamburguer")
+                    span.bar 
+                    span.bar 
+                    span.bar
+    main
+        if success 
+            p #{success.message}
+            a(href='http://localhost:3000/admin')
+                i(class='bx bx-arrow-back') Go back
+
+        if movie
+            h1 ¿Estás seguro que deseas eliminar esta pelicula?
+            form(action=`/removeMovie/${movie.titulo}` method="POST") 
+                h2 Titulo: #{movie.titulo}
+                p Año: #{movie.year}
+                p Director: #{movie.director}
+                p Genero: #{movie.genero}
+                p Duracion: #{movie.duracion}
+                p Imagen: #{movie.imagen}
+
+                input(type="submit" value="Eliminar")
+    script(src="/js/burger.js")

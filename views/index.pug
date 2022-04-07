@@ -1,0 +1,64 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Movie App
+        link(rel="stylesheet", href="./css/styles.css")
+    body 
+        header
+            h1 Header
+        main
+            if !action
+                div#buttons-container
+                    button(type="button" id="signup-btn" onclick="toSignUp()") Sign Up
+                    button(type="button" id="login-btn" onclick="toLogIn()") Log In
+                    button(type="button" id="login-btn" onclick="toGoogleLogIn()") Sign In with Google <i class="fa-brands fa-google"></i>
+
+                    button(type="button" id="signup-btn" onclick="toGuestLogin()") Guest
+                    button(type="button" id="login-btn" onclick="toAdminLogin()") Admin
+
+            else if action === 'signup'
+                button(type="button" id="back-btn" onclick="goBack()") Go Back
+                if error && error.status === 400
+                    p #{error.message}
+                div#signup-container
+                    h2 Sign Up 
+                    form(action="/signup" method="POST")
+                
+                        label(for="signup-name") Name:
+                        input(type="text" name="signup-name" id="signup-name")
+
+                        label(for="signup-email") E-mail:
+                        input(type="text" name="signup-email" id="signup-email")
+
+                        label(for="signup-password") Password:
+                        input(type="password" name="signup-password" id="signup-password")
+
+                        label(for="signup-password2") Repeat Password:
+                        input(type="password" name="signup-password2" id="signup-password2")
+
+                        input(type="submit" value="Sign Up")
+            
+            else if action === 'login'
+                button(type="button" id="back-btn" onclick="goBack()") Go Back
+                if error && error.status === 401
+                   p #{error.message}
+                div#login-container
+                    h2 Log In
+                    form(action="/login" method="POST")
+                
+                        label(for="login-email") E-mail:
+                        input(type="text" name="login-email" id="login-email")
+
+                        label(for="login-password") Password:
+                        input(type="password" name="login-password" id="login-password")
+
+                        input(type="submit" value="Log In")
+
+                    a(href="/recoverpassword") I forgot my password
+
+
+        script(src="https://kit.fontawesome.com/61b8757a12.js" crossorigin="anonymous")
+        script(src="./js/index.js")
