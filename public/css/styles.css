@@ -7,8 +7,6 @@
 body {
     width: 100vw;
     height: 100vh;
-
-    background-color: #30292F;
 }
 
 main {
@@ -17,7 +15,7 @@ main {
 }
 
 header{
-    background-color: #30292F;
+    background-color: #355691;
 }
 
 
@@ -145,6 +143,7 @@ button {
 }
 #login__buttons > button {
     margin: 1rem 0;
+    background-color: #355691;
 }
 #admin__buttons {
     display: flex;
@@ -316,3 +315,16 @@ button {
 }
 
 /* ADMIN */
+#bx {
+    padding: .25rem .5rem;
+    background-color: #213659;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#add-button {
+    padding: .25rem .5rem;
+    background-color: #213659;
+    border-radius: 5px;
+    cursor: pointer;
+}
