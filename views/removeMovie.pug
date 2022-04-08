@@ -26,10 +26,9 @@ html(lang="en")
                 i(class='bx bx-arrow-back')
 
         if movie
-
-            a(href="/admin") 
-                i(class='bx bx-arrow-back', id = "back__button")
             h2 ¿Estás seguro que deseas eliminar esta pelicula?
+            a(href="/admin")
+                i(class='bx bx-arrow-back', id = "back__button")
                 
             form.films__section(action=`/removeMovie/${movie.titulo}` method="POST") 
                 div.film__container
@@ -40,8 +39,8 @@ html(lang="en")
                         p Director: #{movie.director}
                         p Genero: #{movie.genero}
                         p Duracion: #{movie.duracion}
-                    div.film__buttons
-                        input(type="submit" value="Eliminar")
+                    div(class = "film__buttons")
+                        input(type="submit" value="Eliminar" class = "remove__input")
                 
 
     script(src="/js/burger.js")
