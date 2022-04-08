@@ -12,6 +12,7 @@ header {
 body {
     width: 100vw;
     height: 100vh;
+    background-color: #F4F4F5;
 }
 
 main {
@@ -19,6 +20,12 @@ main {
     width: 100%;
 }
 
+
+header > h1 {
+    text-align: center;
+    display: block;
+    color: #fff;
+}
 /* NAVBAR */
 
 .nav__branding {
@@ -29,7 +36,9 @@ main {
 
 #back__button{
     font-size: 1.5rem;
-    color: black;
+    background-color: #355691;
+    color: #fff;
+    cursor: pointer;
 }
 
 .hamburguer {
@@ -116,7 +125,7 @@ li.nav__item {
     }
     
     .nav__branding > span{
-        padding-right: 5vw;
+        padding-right: 10vw;
     }
 
     .nav__menu {
@@ -176,7 +185,15 @@ button {
     border: none;
     padding: .5rem 1rem;
     border-radius: 5px;
+    margin: .25rem 0 0 0.25rem;
 
+    background-color: #355691;
+    color: #fff;
+    cursor: pointer;
+}
+
+.favourites__header{
+    margin: 0.5vh 10vw;
 }
 
 #buttons__section {
@@ -198,6 +215,8 @@ button {
 #login__buttons > button {
     margin: 1rem 0;
     background-color: #355691;
+    color: #fff;
+    cursor: pointer;
 }
 #admin__buttons {
     display: flex;
@@ -207,6 +226,31 @@ button {
 }
 #admin__buttons > button {
     margin: 0 1rem;
+    background-color: #355691;
+    color: #fff;
+    cursor: pointer;
+}
+
+.edit-button{
+    background-color: #213659;
+    color: white;
+}
+
+.remove-button{
+    background-color: #213659;
+    color: white;
+    margin-right: 1.5vw;
+}
+
+.remove__input{
+    background-color: #213659;
+    color: white;
+    margin-right: 1.5vw;
+    padding: 1.50vw;
+}
+
+.success__message{
+    margin: 0.5vh 10vw;
 }
 
 #form-container{
@@ -234,10 +278,26 @@ button {
 }
 #form-btn {
     margin-top: 1rem;
+    background-color: #213659;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 0.35rem 0.65rem;
+    cursor: pointer
 }
 
 #search__form {
     margin: 1rem 0 0 1rem;
+}
+
+#search__form > input[type="submit"] {
+    margin-left: .25rem;
+    padding: .25rem .5rem;
+    background-color: #355691;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
 }
 
 
@@ -245,6 +305,7 @@ button {
 
 .fa-solid {
     margin-right: 1rem;
+    color: #355691;
 }
 
 .fav {
@@ -286,6 +347,7 @@ button {
     grid-row: 1 / 2;
 
     margin-left: .5rem;
+    margin-top: .5rem;
 }
 
 .film__year{
@@ -302,14 +364,18 @@ button {
     align-items: center;
 
     margin-left: .5rem;
+    margin-bottom: .2rem;
 }
 .film__buttons > input {
 
     height: fit-content;
     padding: .2rem .2rem;
 
+    background-color: #355691;
     border: none;
     border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
 }
 
 /* DETALLE DE PELÍCULA */
@@ -317,10 +383,13 @@ button {
 .film__detail__container {
     display: grid;
     grid-template-columns: 25% 75%;
-
+    background-color: #9F9FA8;
+    border-radius: 5px;
     width: calc(100% - 2rem);
     max-width: 750px;
     margin: 1rem auto;
+    padding: 2rem;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
 }
 
 .film__detail__container > img {
@@ -355,6 +424,7 @@ button {
 }
 
 .film__detail__reviews {
+    margin-top: .5rem;
     grid-column: 1 / 3;
     grid-row: 4 / 5;
 }
@@ -377,7 +447,22 @@ button {
 }
 
 #add-button {
+    display: block;
+    margin: 2vh 40vw;
+    text-align: center;
     padding: .25rem .5rem;
+    color: white;
+    background-color: #213659;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#back__button{
+    text-align: center;
+    margin: 0.5vh 10vw;
+    padding: .25rem .5rem;
+    color: white;
     background-color: #213659;
     border-radius: 5px;
     cursor: pointer;

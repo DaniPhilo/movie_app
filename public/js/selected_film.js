@@ -10,9 +10,8 @@ const saveFav = async (event) => {
             body: JSON.stringify({ movieID: buttonID })
         });
 
-        event.target.setAttribute('class', 'input__delete');
+        event.target.classList.toggle('fav');
         event.target.setAttribute('onclick', 'removeFromFav(event)');
-        event.target.setAttribute('value', 'Saved');
     }
     catch (error) {
         console.log(error)
@@ -31,9 +30,8 @@ const removeFromFav = async (event) => {
             body: JSON.stringify({ movieID: buttonID })
         });
 
-        event.target.setAttribute('class', 'input__save');
+        event.target.classList.toggle('fav');
         event.target.setAttribute('onclick', 'saveFav(event)');
-        event.target.setAttribute('value', 'Save as favourite<3');
     }
     catch (error) {
         console.log(error)

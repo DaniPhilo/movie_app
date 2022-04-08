@@ -20,13 +20,11 @@ html(lang="en")
                     span.bar 
                     span.bar
         main
-
-            p(id="add-button", onclick="goToAddMovie()")
-                a(href="/admin") 
-                    i(class='bx bx-arrow-back', id = "back__button")
+            a(href="/admin") 
+                i(class='bx bx-arrow-back', id = "back__button")
 
             if success 
-                p #{success.message}
+                p.success__message #{success.message}
 
             if movie
             div#form-container
