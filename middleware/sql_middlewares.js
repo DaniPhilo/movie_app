@@ -65,7 +65,7 @@ const addToFavourites = async (req, res, next) => {
         User.update(
             { 'favourites': Sequelize.fn('array_append', Sequelize.col('favourites'), movie) },
             { 'where': { 'user_id': req.user.user_id } }
-           );
+        );
 
         res.end();
     } catch (error) {
@@ -93,15 +93,31 @@ const deleteFromFavourites = async (req, res, next) => {
                 favourites.splice(index, 1);
             }
         });
-        
+
         await User.update({ favourites: favourites }, {
             where: { user_id: req.user.user_id }
-            });
+        });
 
         res.end()
-        
+
     } catch (error) {
-        
+
+    }
+}
+
+const isAdmin = async (req, res, next) => {
+    try {
+        const user = await findUserById(req.user.user_id);
+        if (!user) {
+            return next(error)
+        }
+        if (user.is_admin) {
+            return res.redirect('/admin');
+        }
+        return next()
+    }
+    catch (error) {
+        console.log(error)
     }
 }
 
@@ -110,5 +126,6 @@ module.exports = {
     logIn,
     addToFavourites,
     getFavourites,
-    deleteFromFavourites
+    deleteFromFavourites,
+    isAdmin
 }
