@@ -5,6 +5,7 @@ html(lang="en")
         meta(http-equiv="X-UA-Compatible", content="IE=edge")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         title Document
+        script(src="https://kit.fontawesome.com/61b8757a12.js" crossorigin="anonymous")
         link(rel="stylesheet", href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css")
         link(rel="stylesheet", href="../css/styles.css")
     body 
@@ -37,11 +38,12 @@ html(lang="en")
                     p Director: #{response.Director ||response[0].director}
                 div.film__detail__buttons
                     if !favourites
-                        input.input__save(type="button", id=`${response.imdbID || response[0]._id}` onclick="saveFav(event)" value="Save as favourites")
+                        i(class="fa-solid fa-thumbs-up" id=`${response.imdbID || response._id}` onclick="saveFav(event)")
                     if favourites.includes(response.imdbID)
-                        input.input__delete(type="button", id=`${response.imdbID || response[0]._id}` onclick="removeFromFav(event)" value="Saved")
+                        i(class="fa-solid fa-thumbs-up fav" id=`${response.imdbID || response._id}` onclick="removeFromFav(event)")
                     else
-                        input.input__save(type="button", id=`${response.imdbID || response[0]._id}` onclick="saveFav(event)" value="Save as favourites")
+                        i(class="fa-solid fa-thumbs-up" id=`${response.imdbID || response._id}` onclick="saveFav(event)")
+
                 div.film__detail__info
                     p Genre: #{response.Genre || response[0].genero}
                     p Runtime: #{response.Runtime || response[0].duracion} 
