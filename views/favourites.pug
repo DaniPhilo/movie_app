@@ -1,6 +1,8 @@
 include nav.pug
 main 
     h1 Favourites movies
+    a(href="/search") 
+        i(class='bx bx-arrow-back', id = "back__button")
 
     section.films__section
         if movies 

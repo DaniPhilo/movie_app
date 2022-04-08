@@ -10,18 +10,20 @@ html(lang="en")
     body 
         header 
             nav(class = "navbar")
-                a(href = "/search", class = "nav__branding") THE MOVIES APP 
-                ul(class = "nav__menu")
-                    li(class = "nav__item")
-                        p(href = "#Cerrar sesión", class = "nav__link", onclick="logOut()")
-                            i(class = "bx bx-log-out") Cerrar Sesión
+                a(class = "nav__branding") THE MOVIES APP 
+                ul(class = "nav__menu" id = "nav__menu__admin")
+                    li(class = "nav__item" id = "nav__item")
+                        p(href = "#Cerrar sesión", class = "nav__link" onclick="logOut()")  Cerrar Sesión
+                            i(class = "bx bx-log-out")
                 div(class = "hamburguer")
                     span.bar 
                     span.bar 
                     span.bar
 main
+
+    p(id="add-button", onclick="goToAddMovie()") Add a movie!
+        i(class='bx bx-add-to-queue')
     section.films__section
-        p(id="add-button", onclick="goToAddMovie()") Add a movie
         if movies 
             each movie in movies
                 div.film__container
@@ -35,6 +37,7 @@ main
                     div.film__buttons
                         button.edit-button(type="button" id=`${movie.titulo}` onclick="toEditMovie(event)") Edit
                         button.remove-button(type="button" id=`${movie.titulo}` onclick="toDeleteMovie(event)") Delete
+
 
 script(src='/js/admin_movies.js')
 script(src="/js/burger.js")
