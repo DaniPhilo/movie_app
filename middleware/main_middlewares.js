@@ -1,4 +1,4 @@
-const { signUp, logIn, addToFavourites, deleteFromFavourites } = require('./sql_middlewares');
+const { signUp, logIn, addToFavourites, deleteFromFavourites, isAdmin } = require('./sql_middlewares');
 const { createAccessToken, createRefreshToken, authenticateToken, authenticateRefreshToken } = require('./jwt_middlewares');
 const { renderRecoveryPage, sendRecoveryEmail, renderRestorePage, restorePassword } = require('./nodemailer_middlewares');
 const googleAuth = require('./google_auth_middlewares');
@@ -8,6 +8,7 @@ module.exports = {
     logIn,
     addToFavourites,
     deleteFromFavourites,
+    isAdmin,
     createAccessToken,
     createRefreshToken,
     authenticateToken,

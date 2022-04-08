@@ -10,7 +10,7 @@ require('../utils/passport_google_auth');
 const express = require('express');
 const router = express.Router();
 
-const { signUp, logIn, addToFavourites, deleteFromFavourites, createAccessToken, createRefreshToken, authenticateToken, authenticateRefreshToken, renderRecoveryPage, sendRecoveryEmail, renderRestorePage, restorePassword, googleAuth } = require('../middleware/main_middlewares');
+const { signUp, logIn, addToFavourites, deleteFromFavourites, isAdmin, createAccessToken, createRefreshToken, authenticateToken, authenticateRefreshToken, renderRecoveryPage, sendRecoveryEmail, renderRestorePage, restorePassword, googleAuth } = require('../middleware/main_middlewares');
 
 const {
     toDashboard,
@@ -42,7 +42,7 @@ router.route('/login')
     .get((req, res) => {
         res.render('index', { action: 'login' })
     })
-    .post(logIn, createAccessToken, createRefreshToken, toDashboard);
+    .post(logIn, createAccessToken, createRefreshToken, isAdmin, toDashboard);
 
 
 router.get('/login/guest',
