@@ -24,21 +24,27 @@ main
         i(class='bx bx-arrow-back') Go back!
     if success 
         p #{success}
-
-    form(action="/createMovie" method="POST")
-        label(for="titulo") Titulo 
-        input(type="text" placeholder="Ej: Titanic" name="titulo")
-        label(for="year") Año 
-        input(type="text" placeholder="Ej: 1997" name="year")
-        label(for="director") Director 
-        input(type="text" placeholder="Ej: James Cameron" name="director")
-        label(for="genero") Genero 
-        input(type="text" placeholder="Ej: Drama/Romance"   name="genero")
-        label(for="duracion") Duración 
-        input(type="text" placeholder="Ej: 195 mins" name="duracion")
-        label(for="imagen") Imagen 
-        input(type="text" name="imagen")
-        input(type="submit")
+    div#form-container
+        form(action="/createMovie" method="POST")
+            label(for="titulo") Titulo 
+            input(type="text" placeholder="Ej: Titanic" name="titulo")
+            
+            label(for="year") Año 
+            input(type="text" placeholder="Ej: 1997" name="year")
+            
+            label(for="director") Director 
+            input(type="text" placeholder="Ej: James Cameron" name="director")
+            
+            label(for="genero") Genero 
+            input(type="text" placeholder="Ej: Drama/Romance"   name="genero")
+            
+            label(for="duracion") Duración 
+            input(type="text" placeholder="Ej: 195 mins" name="duracion")
+            
+            label(for="imagen") Imagen 
+            input(type="text" name="imagen")
+            
+            input(type="submit" id="form-btn" value="Save")
 
 script(src="/js/create_movie.js")
 script(src="/js/burger.js")
