@@ -6,14 +6,14 @@ html(lang="en")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         title Document
         link(rel="stylesheet", href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css")
-        link(rel="stylesheet", href="../css/styles.css")
+        link(rel="stylesheet", href="./css/styles.css")
     body 
         header 
             nav(class = "navbar")
                 a(class = "nav__branding") THE MOVIES APP 
                 ul(class = "nav__menu" id = "nav__menu__admin")
                     li(class = "nav__item" id = "nav__item")
-                        p(href = "#Cerrar sesión", class = "nav__link" onclick="logOut()")  Cerrar Sesión
+                        p(href = "#Cerrar sesión", class = "nav__link", onclick="logOut()") Cerrar Sesión
                             i(class = "bx bx-log-out")
                 div(class = "hamburguer")
                     span.bar 
@@ -41,3 +41,4 @@ main
         input(type="submit")
 
 script(src="/js/create_movie.js")
+script(src="/js/burger.js")

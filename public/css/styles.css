@@ -61,12 +61,15 @@ header {
     position: fixed;
     left: -100%;
     top: 70px;
-    gap: 0;
     flex-direction: column;
     background-color: #213659;
     width: 100%;
     text-align: center;
     transition: 0.3s;
+}
+
+.nav__menu.active {
+    left: 0;
 }
 
 li.nav__item {
@@ -75,10 +78,6 @@ li.nav__item {
 
 .nav__item {
     margin: 16px 0;
-}
-
-.nav__menu.active {
-    left: 0;
 }
 
 .nav__link {
