@@ -8,7 +8,7 @@ const goToMovie = async (event) => {
 const saveFav = async (event) => {
     const buttonID = event.target.getAttribute('id');
     try {
-        await fetch('http://localhost:3000/movies', {
+        await fetch('/movies', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -29,7 +29,7 @@ const saveFav = async (event) => {
 const removeFromFav = async (event) => {
     const buttonID = event.target.getAttribute('id');
     try {
-        await fetch('http://localhost:3000/movies/remove', {
+        await fetch('/movies/remove', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

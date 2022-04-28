@@ -12,8 +12,8 @@ document.querySelectorAll(".nav__link").forEach(n => n.addEventListener("click",
 
 // Eventlistener para logout:
 const logOut = async () => {
-    await fetch('http://localhost:3000/logout', {
+    await fetch('/logout', {
         method: 'POST'
     });
-    window.location.href = 'http://localhost:3000'
+    window.location.href = '/'
 }

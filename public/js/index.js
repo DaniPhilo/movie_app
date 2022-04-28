@@ -1,23 +1,23 @@
 const goBack = () => {
-    window.location.href = 'http://localhost:3000';
+    window.location.href = '/';
 }
 
 const toSignUp = () => {
-    window.location.href = 'http://localhost:3000/signup';
+    window.location.href = '/signup';
 }
 
 const toLogIn = () => {
-    window.location.href = 'http://localhost:3000/login';
+    window.location.href = '/login';
 }
 
 const toGoogleLogIn = () => {
-    window.location.href = 'http://localhost:3000/auth/google';
+    window.location.href = '/auth/google';
 }
 
 const toGuestLogin = () => {
-    window.location.href = 'http://localhost:3000/login/guest';
+    window.location.href = '/login/guest';
 }
 
 const toAdminLogin = () => {
-    window.location.href = 'http://localhost:3000/login/admin';
+    window.location.href = '/login/admin';
 }

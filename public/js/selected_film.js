@@ -2,7 +2,7 @@
 const saveFav = async (event) => {
     const buttonID = event.target.getAttribute('id');
     try {
-        await fetch('http://localhost:3000/movies', {
+        await fetch('/movies', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -22,7 +22,7 @@ const saveFav = async (event) => {
 const removeFromFav = async (event) => {
     const buttonID = event.target.getAttribute('id');
     try {
-        await fetch('http://localhost:3000/movies/remove', {
+        await fetch('/movies/remove', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -39,7 +39,7 @@ const removeFromFav = async (event) => {
 }
 
 const goBack = () => {
-    window.location.href = 'http://localhost:3000/search'
+    window.location.href = '/search'
 }
 
 // Scrapping:
@@ -51,7 +51,7 @@ const getReviews = async () => {
     let parsedTitle = title.includes(' ') ? title.replace(/\s/gi, '-') : title;
 
     const fetchScrapping = async () => {
-        const response = await fetch(`http://localhost:3000/search/${parsedTitle}`, {
+        const response = await fetch(`/search/${parsedTitle}`, {
             method: 'POST'
         });
         const data = await response.json();
