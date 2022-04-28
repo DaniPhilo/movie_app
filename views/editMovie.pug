@@ -10,42 +10,46 @@ html(lang="en")
     body 
         header 
             nav(class = "navbar")
-                a(href = "/search", class = "nav__branding") THE MOVIES APP 
-                ul(class = "nav__menu") 
+                a(href = "/admin", class = "nav__branding") THE MOVIES APP 
+                ul(class = "nav__menu" id = "nav__menu__admin") 
                     li(class = "nav__item")
-                        p(href = "#Cerrar sesión", class = "nav__link", onclick="logOut()")
-                            i(class = "bx bx-log-out") Cerrar Sesión
+                        p(href = "#Cerrar sesión", class = "nav__link", onclick="logOut()") Cerrar Sesión
+                            i(class = "bx bx-log-out")
                 div(class = "hamburguer")
                     span.bar 
                     span.bar 
                     span.bar
         main
-            p(id="add-button", onclick="goToAddMovie()")
-                i(class='bx bx-arrow-back') Go back!
+            a(href="/admin") 
+                i(class='bx bx-arrow-back', id = "back__button")
+
             if success 
-                p #{success.message}
+                p.success__message #{success.message}
 
             if movie
-                form(action=`/editMovie/${movie.titulo}` method="POST") 
-                    label(for="titulo") Title:
-                    input(type="text" value=`${movie.titulo}` name="titulo")
-                    
-                    label(for="year") Year:
-                    input(type="number" value=`${movie.year}` name="year")
-                    
-                    label(for="director") Director: 
-                    input(type="text" value=`${movie.director}` name="director")
-                    
-                    label(for="genero") Genre:
-                    input(type="text" value=`${movie.genero}` name="genero")
-                    
-                    label(for="duracion") Duration: 
-                    input(type="text" value=`${movie.duracion}` name="duracion")    
-                    
-                    label(for="imagen") Image:
-                    input(type="text", value=`${movie.imagen}` name="imagen")
+            div#form-container
+                    form(action=`/editMovie/${movie.titulo}` method="POST") 
+                        label(for="titulo") Title:
+                        input(type="text" value=`${movie.titulo}` name="titulo")
+                        
+                        label(for="year") Year:
+                        input(type="number" value=`${movie.year}` name="year")
+                        
+                        label(for="director") Director: 
+                        input(type="text" value=`${movie.director}` name="director")
+                        
+                        label(for="genero") Genre:
+                        input(type="text" value=`${movie.genero}` name="genero")
+                        
+                        label(for="duracion") Duration: 
+                        input(type="text" value=`${movie.duracion}` name="duracion")    
+                        
+                        label(for="imagen") Image:
+                        input(type="text", value=`${movie.imagen}` name="imagen")
 
-                    input(type="submit" value="Save")
+                        input(type="submit" id="form-btn" value="Save")
+
+        script(src="/js/edit_movies.js")
 
 
 script(src='/js/admin_movies.js')

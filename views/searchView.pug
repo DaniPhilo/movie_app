@@ -1,27 +1,30 @@
 include nav.pug
 main
-    section
-        form(action="/search", method="POST")
+    section#search__section
+        form#search__form(action="/search", method="POST")
             input(type="text", name="filmBrowser", placeholder="Busca tu película", required)
             input(type="submit", value="Search")
 
 
-            section.films__section
-                    if response 
-                        each film in response 
-                            div.film__container
-                                p.film__title #{film.Title ||film.titulo}
-                                img.film__img(src=`${film.Poster || film.imagen}`)
-                                p.film__year #{film.Year || film.year}
-                                p.film__director #{film.Director || film.director}
-                                p.film__genre #{film.Genre}
-                                p.film__runtime #{film.Runtime}
-                                input(class = "input__show", id = `${film.Title || film.titulo}`,type="button", value="Show details", name="showFilm" onclick="goToMovie(event)")
-                                if !favourites
-                                    input.input__save(type="button", id=`${film.imdbID || film._id}` onclick="saveFav(event)" value="Save as favourite<3")
-                                else if favourites.includes(film.imdbID)
-                                    input.input__delete(type="button", id=`${film.imdbID || film._id}` onclick="removeFromFav(event)" value="Saved") 
-                                else
-                                    input.input__save(type="button", id=`${film.imdbID || film._id}` onclick="saveFav(event)" value="Save as favourite<3")
+    section.films__section
+        if response
+            each film in response 
+                div.film__container
+                    img.film__img(src=`${film.Poster || film.imagen}`)
+                    div.film__texts
+                        h2.film__title #{film.Title || film.titulo}                    
+                        p.film__year #{film.Year || film.year}
+                    div.film__buttons
+                        input(class = "input__show" id = `${film.Title || film.titulo}` type="button" value="Show details" onclick="goToMovie(event)")
+                        if !favourites
+                            i(class="fa-solid fa-thumbs-up" id=`${film.imdbID || film._id}` onclick="saveFav(event)")
+                            //- input.input__save(type="button", id=`${film.imdbID || film._id}` onclick="saveFav(event)" value="Save as favourite<3")
+                        else if favourites.includes(film.imdbID)
+                            i(class="fa-solid fa-thumbs-up fav" id=`${film.imdbID || film._id}` onclick="removeFromFav(event)")
+                            //- input.input__delete(type="button", id=`${film.imdbID || film._id}` onclick="removeFromFav(event)" value="Saved") 
+                        else
+                            i(class="fa-solid fa-thumbs-up" id=`${film.imdbID || film._id}` onclick="saveFav(event)")
+                            //- input.input__save(type="button", id=`${film.imdbID || film._id}` onclick="saveFav(event)" value="Save as favourite<3")
 
-        script(src="/js/searchView.js")
+
+script(src="/js/searchView.js")

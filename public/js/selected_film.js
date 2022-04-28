@@ -10,9 +10,8 @@ const saveFav = async (event) => {
             body: JSON.stringify({ movieID: buttonID })
         });
 
-        event.target.setAttribute('class', 'input__delete');
+        event.target.classList.toggle('fav');
         event.target.setAttribute('onclick', 'removeFromFav(event)');
-        event.target.setAttribute('value', 'Saved');
     }
     catch (error) {
         console.log(error)
@@ -31,9 +30,8 @@ const removeFromFav = async (event) => {
             body: JSON.stringify({ movieID: buttonID })
         });
 
-        event.target.setAttribute('class', 'input__save');
+        event.target.classList.toggle('fav');
         event.target.setAttribute('onclick', 'saveFav(event)');
-        event.target.setAttribute('value', 'Save as favourite<3');
     }
     catch (error) {
         console.log(error)
@@ -48,6 +46,7 @@ const goBack = () => {
 
 const getReviews = async () => {
     let text = document.querySelector('#movie-title').innerText;
+
     let title = text.replace(/Title: /gi, '');
     let parsedTitle = title.includes(' ') ? title.replace(/\s/gi, '-') : title;
 
@@ -78,9 +77,10 @@ getReviews()
 .then((reviews) => {
     reviews.forEach(review => {
         const comment = document.createElement('div');
+        comment.classList.add('review');
         comment.innerHTML = `<h3>${review.name}</h3>
                              <p>${review.text}</p>`;
-        const main = document.querySelector('main');
-        main.appendChild(comment);
+        const section = document.querySelector('.film__detail__reviews');
+        section.appendChild(comment);
     });
 });

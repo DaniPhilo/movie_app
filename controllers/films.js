@@ -20,8 +20,11 @@ const getListOfFilms = async (req, res) => {
             let response = await getFilmsByTitle(movie);
             let mongoResponse = await Movie.find({ titulo: movie });
 
-            if (mongoResponse.length > 0) {
+            if (mongoResponse.length > 0 && response) {
                 response = mongoResponse.concat(response)
+            }
+            else if (mongoResponse.length > 0) {
+                response = mongoResponse;
             }
             const user = await findUserById(req.user.user_id);
             const favourites = user.favourites;

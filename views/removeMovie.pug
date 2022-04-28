@@ -10,30 +10,36 @@ html(lang="en")
     body 
         header 
             nav(class = "navbar")
-                a(href = "/search", class = "nav__branding") THE MOVIES APP 
-                ul(class = "nav__menu")
-                    li(class = "nav__item")
-                        p(href = "#Cerrar sesión", class = "nav__link", onclick="logOut()")
-                            i(class = "bx bx-log-out") Cerrar Sesión
+                a(class = "nav__branding") THE MOVIES APP 
+                ul(class = "nav__menu" id = "nav__menu__admin")
+                    li(class = "nav__item" id = "nav__item")
+                        p(href = "#Cerrar sesión", class = "nav__link" onclick="logOut()")  Cerrar Sesión
+                            i(class = "bx bx-log-out")
                 div(class = "hamburguer")
                     span.bar 
                     span.bar 
                     span.bar
     main
         if success 
-            p #{success.message}
-            a(href='http://localhost:3000/admin')
-                i(class='bx bx-arrow-back') Go back
+            p.success__message #{success.message}
+            a(href='http://localhost:3000/admin' id="add-button") Go back
 
         if movie
-            h1 ¿Estás seguro que deseas eliminar esta pelicula?
-            form(action=`/removeMovie/${movie.titulo}` method="POST") 
-                h2 Titulo: #{movie.titulo}
-                p Año: #{movie.year}
-                p Director: #{movie.director}
-                p Genero: #{movie.genero}
-                p Duracion: #{movie.duracion}
-                p Imagen: #{movie.imagen}
+            h2 ¿Estás seguro que deseas eliminar esta pelicula?
+            a(href="/admin")
+                i(class='bx bx-arrow-back', id = "back__button")
+                
+            form.films__section(action=`/removeMovie/${movie.titulo}` method="POST") 
+                div.film__container
+                    img.film__img(src=`${movie.imagen}`)
+                    div.film__texts
+                        h3 Titulo: #{movie.titulo}
+                        p Año: #{movie.year}
+                        p Director: #{movie.director}
+                        p Genero: #{movie.genero}
+                        p Duracion: #{movie.duracion}
+                    div(class = "film__buttons")
+                        input(type="submit" value="Eliminar" class = "remove__input")
+                
 
-                input(type="submit" value="Eliminar")
     script(src="/js/burger.js")
