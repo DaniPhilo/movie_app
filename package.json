@@ -2,10 +2,10 @@
   "name": "movie_app",
   "version": "1.0.0",
   "description": "Movie app for The Bridge FSD Bootcamp",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon app.js"
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
